@@ -586,10 +586,10 @@ session_start();
 				<div id="nav" class="navbar-collapse collapse justify-content-end text-uppercase fw-bold">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a href="index.php" class="nav-link mx-2 menuitems">Home</a></li>
-						<li class="nav-item"><a href="#" class="nav-link mx-2 menuitems">About Us</a></li>
+						<li class="nav-item"><a href="./aboutus.php" class="nav-link mx-2 menuitems">About Us</a></li>
 						<li class="nav-item"><a href="./user/hotels.php" class="nav-link mx-2 menuitems">Hotels</a></li>
 						<li class="nav-item"><a href="#" class="nav-link mx-2 menuitems">Services</a></li>
-						<li class="nav-item"><a href="#" class="nav-link mx-2 menuitems">Contact</a></li>
+						<li class="nav-item"><a href="./contactus.php" class="nav-link mx-2 menuitems">Contact</a></li>
 						<?php if (isset($_SESSION['user_id'])): ?>
 							<li class="nav-item"><a href="user/profile.php" class="nav-link mx-2 menuitems">Profile</a></li>
 							<?php if ($_SESSION['role'] === 'admin'): ?>
@@ -613,7 +613,7 @@ session_start();
 
 			<div class="text-light text-center text-md-end banners">
 				<h1 class="display-5 bannertheaders">Welcome to <span class="display-2 text-uppercase">GoldenSands</span> Booking Services</h1>
-				<p class="lead bannerparagraphs">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				<p class="lead bannerparagraphs">Connecting Travelers with the Perfect Place to Stay</p>
 			</div>
 			
 			<!-- End Banner -->
@@ -640,8 +640,8 @@ session_start();
 							<div class="lines"></div>
 						</div>
 
-						<h5><i>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</i></h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+						<h5><i>Making Hotel Booking Simple, Secure, and Stress-Free</i></h5>
+						<p>We are a trusted hotel booking platform committed to making travel easy, affordable, and enjoyable. With a wide selection of handpicked hotels, secure payment options, and dedicated customer support, we help travelers find the perfect stay—whether it’s a luxury escape, a family vacation, or a quick weekend getaway.</p>
 						<a href="javascript:void(0);" class="btn btn-danger rounded-0">Read Me</a>
 					</div>
 
@@ -709,7 +709,7 @@ session_start();
 					</div>
 					<div class="col-lg-7 text-white text-center text-lg-end fromrights advtexts">
 						<h1>How we started our booking services in Myanmar</h1>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+						<p>We began our journey with a simple goal: to make hotel booking in Myanmar more accessible, reliable, and convenient for both local and international travelers. What started as a small initiative has grown into a trusted platform that connects guests with quality accommodations across the country, offering a seamless booking experience backed by local expertise and customer care.</p>
 					</div>
 
 				</div>
@@ -731,7 +731,6 @@ session_start();
 				<div class="text-center">
 					<div class="col">
 						<h3 class="titles">Satisfied Clients</h3>
-						<p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 					</div>
 				</div>
 
@@ -785,7 +784,7 @@ session_start();
 								<div class="carousel-item text-center active">
 									<img src="./assets/img/users/user1.jpg" class="rounded-circle" alt="user1" />
 									<blockquote class="text-white">
-										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+										<p>Booking my hotel through this site was so easy! I found a great place in Yangon at a great price, and the whole process was smooth from start to finish.</p>
 									</blockquote>
 									<h5 class="text-light text-uppercase fw-bold mb-3">Ms.July</h5>
 									<ul class="list-inline mb-5">
@@ -800,7 +799,7 @@ session_start();
 								<div class="carousel-item text-center">
 									<img src="./assets/img/users/user2.jpg" class="rounded-circle" alt="user2" />
 									<blockquote class="text-white">
-										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+										<p>Excellent service and support. The hotel matched the photos and description exactly, and I got instant confirmation. Highly recommend!</p>
 									</blockquote>
 									<h5 class="text-light text-uppercase fw-bold mb-3">Mr.Anton</h5>
 									<ul class="list-inline mb-5">
@@ -815,7 +814,7 @@ session_start();
 								<div class="carousel-item text-center">
 									<img src="./assets/img/users/user3.jpg" class="rounded-circle" alt="user3" />
 									<blockquote class="text-white">
-										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+										<p>I’ve used this site for two trips now, and both times I got great deals and quick bookings. The team even helped when I had to change my dates!</p>
 									</blockquote>
 									<h5 class="text-light text-uppercase fw-bold mb-3">Ms.Yoon</h5>
 									<ul class="list-inline mb-5">
@@ -869,7 +868,7 @@ session_start();
 				<div class="text-center">
 					<div class="col">
 						<h3 class="titles">Services</h3>
-						<p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<p class="lead">Explore premium services that make you stay unforgettable</p>
 					</div>
 				</div>
 				<!-- End title -->
@@ -877,39 +876,39 @@ session_start();
 				<div class="row funicons">
 
 					<div class="col-md-4">
-						<img src="./assets/img/icon/services1.png" alt="services1" />
-						<h4>Fast services</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<img src="./assets/img/icon/double-bed.png" alt="double-bed" />
+						<h4>Luxury Rooms</h4>
+						<p>Spacious, elegant rooms with modern amenities.</p>
 					</div>
 
 					<div class="col-md-4">
-						<img src="./assets/img/icon/services2.png" alt="services2" />
-						<h4>Secure Payment</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<img src="./assets/img/icon/padlock.png" alt="padlock" />
+						<h4>Secure Booking</h4>
+						<p>Safe and encrypted online booking process.</p>
 					</div>
 
 					<div class="col-md-4">
-						<img src="./assets/img/icon/services3.png" alt="services3" />
-						<h4>Expert team</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<img src="./assets/img/icon/man.png" alt="man" />
+						<h4>Professional Staff</h4>
+						<p>Friendly 24/7 front desk and room service.</p>
 					</div>
 
 					<div class="col-md-4">
-						<img src="./assets/img/icon/services4.png" alt="services4" />
-						<h4>Affordable services</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<img src="./assets/img/icon/price-tag.png" alt="price-tag" />
+						<h4>Best Price Guarantee</h4>
+						<p>Lowest prices when you book directly with us.</p>
 					</div>
 
 					<div class="col-md-4">
-						<img src="./assets/img/icon/services5.png" alt="services5" />
-						<h4>90 Days Warranty</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<img src="./assets/img/icon/calendar-check.png" alt="calendar-check" />
+						<h4>Flexible Cancellations</h4>
+						<p>Change your plans easily with flexible cancellation policies.</p>
 					</div>
 
 					<div class="col-md-4">
-						<img src="./assets/img/icon/services6.png" alt="services6" />
-						<h4>Award Winning</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<img src="./assets/img/icon/award.png" alt="award" />
+						<h4>Award-Winning Service</h4>
+						<p>Recognized for outstanding hospitality.</p>
 					</div>
 
 				</div>
@@ -963,7 +962,7 @@ session_start();
 
 					<div class="col-md-3 col-sm-6">
 						<h5 class="mb-3"><img src="./assets/img/fav/favicon.png" width="70" alt="footericon" /> About GOLDENSANDS</h5>
-						<p class="small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+						<p class="small">GOLDENSANDS is a premium hospitality brand offering unforgettable stays along Myanmar’s most beautiful beaches. Known for its warm service, elegant accommodations, and stunning seaside views, GOLDENSANDS is the perfect escape for travelers seeking relaxation, romance, or adventure. With a focus on comfort, quality, and authentic local experiences, we welcome guests from around the world to discover the best of Myanmar’s coastal charm.</p>
 					</div>
 
 					<div class="col-md-3 col-sm-6">
@@ -983,15 +982,15 @@ session_start();
 							<li><a href="javascript:void(0);" class="footerlinks">Customers Services</a></li>
 							<li><a href="javascript:void(0);" class="footerlinks">Online Chat</a></li>
 							<li><a href="javascript:void(0);" class="footerlinks">Support</a></li>
-							<li><a href="javascript:void(0);" class="footerlinks">info@plannco.com</a></li>
+							<li><a href="javascript:void(0);" class="footerlinks">info@goldensands.com</a></li>
 						</ul>
 					</div>
 
 					<div class="col-md-3 col-sm-6">
 						<h5 class="mb-3">Contact Us</h5>
 						<ul class="list-unstyled">
-							<li><a href="javascript:void(0);" class="footerlinks">1-9/19(A),60 Street, Between Theik Pan Street And, Aung San St, Mandalay.</a></li>
-							<li><a href="javascript:void(0);" class="footerlinks">Phone: +95 9 422042225 / +95 9 422042242</a></li>
+							<li>Email: <a href="javascript:void(0);" class="footerlinks">goldensands@gmail.com</a></li>
+							<li>Phone: <a href="javascript:void(0);" class="footerlinks">+95 9 123456789 / +95 9 987654321</a></li>
 						</ul>
 					</div>
 				</div>

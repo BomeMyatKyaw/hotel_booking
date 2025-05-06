@@ -47,39 +47,64 @@ if (isset($_POST['delete'])) {
 <head>
     <title>Edit Account</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .btn {
+            border-radius: 30px;
+        }
+    </style>
 </head>
 <body class="p-4">
-<div class="container">
-    <h2>Edit Account</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card p-4">
+                <h3 class="mb-4 text-center">Edit Your Account</h3>
 
-    <?php if (!empty($success)) echo "<div class='alert alert-success'>$success</div>"; ?>
+                <?php if (!empty($success)): ?>
+                    <div class="alert alert-success"><?= $success ?></div>
+                <?php endif; ?>
 
-    <form method="POST">
-        <div class="mb-3">
-            <label class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" value="<?= htmlspecialchars($user['username']) ?>" required>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" value="<?= htmlspecialchars($user['username']) ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($user['email']) ?>" required>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button type="submit" name="update" class="btn btn-primary">Update Account</button>
+                    </div>
+                </form>
+
+                <hr>
+
+                <div class="d-flex gap-2">
+                    <form method="POST" onsubmit="return confirm('Are you sure you want to disable your account? You can reactivate later by contacting admin.')">
+                        <button type="submit" name="disable" class="btn btn-warning">Disable Account</button>
+                    </form>
+
+                    <form method="POST" onsubmit="return confirm('Are you sure you want to permanently delete your account? This cannot be undone.')">
+                        <button type="submit" name="delete" class="btn btn-danger">Delete Account</button>
+                    </form>
+
+                    <a href="../index.php" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
         </div>
-
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($user['email']) ?>" required>
-        </div>
-
-        <button type="submit" name="update" class="btn btn-primary">Update</button>
-    </form>
-
-    <hr>
-
-    <div class="d-flex justify-content-start align-items-center">
-        <form method="POST" onsubmit="return confirm('Are you sure you want to disable your account? You can reactivate later by contacting admin.')">
-            <button type="submit" name="disable" class="btn btn-warning mt-2">Disable Account</button>
-        </form>
-
-        <form method="POST" onsubmit="return confirm('Are you sure you want to permanently delete your account? This cannot be undone.')">
-            <button type="submit" name="delete" class="btn btn-danger mt-2 mx-3">Delete Account</button>
-        </form>
-
-        <a href="../index.php" class="btn btn-secondary mt-2">Back to Home</a>
     </div>
 </div>
 </body>
