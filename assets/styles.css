@@ -1,0 +1,49 @@
+body{
+    background-color: #000;
+}
+
+/* Basic Styling for Navigation */
+header nav {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* Styling for Hotel Cards */
+.hotel-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.hotel-card img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
