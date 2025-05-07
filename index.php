@@ -57,7 +57,7 @@ session_start();
 
 			header{
 				height: 100vh;
-				background: linear-gradient(30deg,rgba(0,0,0,0),rgba(0,0,0,0.5)),url(./assets/img/banner/banner2.jpg);
+				background: linear-gradient(30deg,rgba(0,0,0,0),rgba(0,0,0,0.5)),url(./assets/img/banner/beach.jpg);
 				background-repeat: no-repeat;
 				background-size: cover;
 				background-position: center;
@@ -156,7 +156,7 @@ session_start();
 				background-image: linear-gradient(
 					rgba(0,0,0,0.3),
 					rgba(0,0,0,0.3)
-				), url(./assets/img/banner/banner2.jpg);
+				), url(./assets/img/banner/beach.jpg);
 				background-repeat: no-repeat;
 				background-size: cover;
 				background-position: center;
@@ -412,7 +412,7 @@ session_start();
 				background-image: linear-gradient(
 					rgba(0,0,0,0),
 					rgba(0,0,0,0.1)
-				) ,url(./assets/img/banner/banner3.jpg);
+				) ,url(./assets/img/banner/beach2.jpg);
 				background-repeat: no-repeat;
 				background-size: cover;
 				background-position: center;
@@ -485,7 +485,7 @@ session_start();
 					rgba(0,0,0,0.9) 50%,
 					rgba(0,0,0,0.5) 30%,
 					transparent
-				),url(./assets/img/banner/banner3.jpg);
+				),url(./assets/img/banner/beach2.jpg);
 				background-repeat: no-repeat;
 				background-size: cover;
 				background-position: center;
@@ -586,13 +586,15 @@ session_start();
 				<div id="nav" class="navbar-collapse collapse justify-content-end text-uppercase fw-bold">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a href="index.php" class="nav-link mx-2 menuitems">Home</a></li>
-						<li class="nav-item"><a href="./aboutus.php" class="nav-link mx-2 menuitems">About Us</a></li>
 						<li class="nav-item"><a href="./user/hotels.php" class="nav-link mx-2 menuitems">Hotels</a></li>
+						<li class="nav-item"><a href="./activities.php" class="nav-link mx-2 menuitems">Activities</a></li>
 						<li class="nav-item"><a href="#" class="nav-link mx-2 menuitems">Services</a></li>
 						<li class="nav-item"><a href="./contactus.php" class="nav-link mx-2 menuitems">Contact</a></li>
+						<li class="nav-item"><a href="./aboutus.php" class="nav-link mx-2 menuitems">About Us</a></li>
 						<?php if (isset($_SESSION['user_id'])): ?>
 							<li class="nav-item"><a href="user/profile.php" class="nav-link mx-2 menuitems">Profile</a></li>
 							<?php if ($_SESSION['role'] === 'admin'): ?>
+								<li class="nav-item"><a href="admin/allbookinglists.php" class="nav-link mx-2 menuitems">Lists</a></li>
 								<li class="nav-item"><a href="admin/manage_hotels.php" class="nav-link mx-2 menuitems">Manage</a></li>
 							<?php elseif ($_SESSION['role'] === 'user'): ?>
 								<li class="nav-item"><a href="user/booking_list.php" class="nav-link mx-2 menuitems">My Bookings</a></li>
