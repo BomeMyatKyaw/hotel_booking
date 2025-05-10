@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2025 at 09:24 AM
+-- Generation Time: May 10, 2025 at 12:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,13 +38,6 @@ CREATE TABLE `bookings` (
   `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `bookings`
---
-
-INSERT INTO `bookings` (`id`, `user_id`, `hotel_id`, `check_in`, `check_out`, `total_price`, `created`, `updated`) VALUES
-(1, 2, 1, '2025-05-06', '2025-05-08', 50000.00, '2025-05-06 04:37:40', '2025-05-06 04:37:40');
-
 -- --------------------------------------------------------
 
 --
@@ -57,16 +50,9 @@ CREATE TABLE `hotels` (
   `description` text NOT NULL,
   `image` varchar(255) NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `location_embed` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `hotels`
---
-
-INSERT INTO `hotels` (`id`, `name`, `description`, `image`, `price`, `created_at`) VALUES
-(1, 'Mandalay', 'gg', '', 25000.00, '2025-05-02 07:32:52'),
-(2, 'Yangon', 'gg', '', 45000.00, '2025-05-02 07:33:49');
 
 -- --------------------------------------------------------
 
@@ -79,16 +65,6 @@ CREATE TABLE `hotel_images` (
   `hotel_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `hotel_images`
---
-
-INSERT INTO `hotel_images` (`id`, `hotel_id`, `image`) VALUES
-(8, 1, '2.jpg'),
-(9, 2, '3.jpg'),
-(10, 1, '3.jpg'),
-(11, 1, '1.jpg');
 
 -- --------------------------------------------------------
 
@@ -153,19 +129,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `hotel_images`
 --
 ALTER TABLE `hotel_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`

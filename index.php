@@ -204,7 +204,7 @@ session_start();
 
 			/* End About Us Section */
 
-			/* Start Properties Section */
+			/* Start Hotels Section */
 
 			.titles{
 				text-transform: uppercase;
@@ -250,12 +250,29 @@ session_start();
 				color: var(--primary-color);
 			}
 
-			/* End Properties Section */
+			/* End Hotels Section */
 
-			/* Start Adv Section */
+			/* Start Beach Section */
+
+			.beachtitles{
+				text-transform: uppercase;
+				/* background-color: steelblue; */
+				display: inline-block;
+				font-size: 40px;
+				
+				padding: 5px 20px;
+
+				position: relative;
+			}
 
 			.missions{
 				background-color: var(--primary-color);
+			}
+
+			.beaches{
+				width: 100%;
+				height: auto;
+				margin: 0 auto;
 			}
 
 			.fromlefts{
@@ -290,73 +307,11 @@ session_start();
 				}
 			}
 
-			/* End Adv Section */
-
-			/* Start Services Section */
-
-			.services{
-				background: linear-gradient(
-					200deg,
-					var(--secondary-color),
-					var(--primary-color)
-				);
+			.rounded-image {
+				border-radius: 20px; /* or any value you like */
 			}
 
-			.servicecards{
-				position: relative;
-				overflow: hidden;
-
-				white-space: pre-wrap;
-			}
-
-			.servicecards::before{
-
-				content: "You may need our service ? \A Try and upgrade your living environment. \a \f004  \f004  \f004";
-				font-family: "Font Awesome 5 Free";
-				width: 100%;
-				height: 100%;
-				background-color: rgba(0,0,0,0.4);
-				color: #fff;
-				text-align: center;
-				line-height: 2;
-
-				position: absolute;
-				left: 0;
-				top: 0;
-				
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-
-			.servicecards:hover::before{
-				content: '';
-				background-color: rgba(0,0,0,0.1);
-			}
-
-			.servicecards img{
-				transition: transform .5s;
-			}
-
-			.servicecards:hover img{
-				transform: scale(1.1);
-			}
-
-			.headings{
-				width: 40%;
-				background-color: rgba(0,0,0,0.7);
-				font-size: 14px;
-				text-align: center;
-				letter-spacing: 1px;
-				opacity: 0.7;
-
-				position: absolute;
-				right: 0;
-				top: 80%;
-
-			}
-
-			/* End Services Section */
+			/* End Beach Section */
 
 			/* Start Client Section */
 
@@ -465,7 +420,7 @@ session_start();
 
 			/* End Quotation Section */
 
-			/* Start Furniture Section */
+			/* Start Service Section */
 
 			.funicons img{
 				width: 70px;
@@ -475,7 +430,7 @@ session_start();
 				background-color: #f1f1f1;
 			}
 
-			/* End Furniture Section */
+			/* End Service Section */
 
 			/* Start Contact Section */
 
@@ -587,8 +542,6 @@ session_start();
 					<ul class="navbar-nav">
 						<li class="nav-item"><a href="index.php" class="nav-link mx-2 menuitems">Home</a></li>
 						<li class="nav-item"><a href="./user/hotels.php" class="nav-link mx-2 menuitems">Hotels</a></li>
-						<li class="nav-item"><a href="./activities.php" class="nav-link mx-2 menuitems">Activities</a></li>
-						<li class="nav-item"><a href="#" class="nav-link mx-2 menuitems">Services</a></li>
 						<li class="nav-item"><a href="./contactus.php" class="nav-link mx-2 menuitems">Contact</a></li>
 						<li class="nav-item"><a href="./aboutus.php" class="nav-link mx-2 menuitems">About Us</a></li>
 						<?php if (isset($_SESSION['user_id'])): ?>
@@ -652,7 +605,6 @@ session_start();
 		</section>
 		<!-- End About Us Section -->
 
-
 		<!-- Start Hotel Section -->
 		<section class="py-5">
 			<div class="container-fluid">
@@ -678,22 +630,22 @@ session_start();
 
 				<div class="container-fluid">
 					<div class="d-flex flex-wrap justify-content-center">
-						<div class="filters house"><a href="./assets/img/gallery/image1.jpg" data-title="image1" data-lightbox="roadtrip"><img src="./assets/img/gallery/image1.jpg" width="200px" alt="image1" /></a></div>
-						<div class="filters house"><a href="./assets/img/gallery/image2.jpg" data-title="image2" data-lightbox="roadtrip"><img src="./assets/img/gallery/image2.jpg" width="200px" alt="image2" /></a></div>
-						<div class="filters house"><a href="./assets/img/gallery/image3.jpg" data-title="image3" data-lightbox="roadtrip"><img src="./assets/img/gallery/image3.jpg" width="200px" alt="image3" /></a></div>
-						<div class="filters decoration"><a href="./assets/img/gallery/image4.jpg" data-title="image4"data-lightbox="roadtrip"><img src="./assets/img/gallery/image4.jpg" width="200px" alt="image4" /></a></div>
-						<div class="filters decoration"><a href="./assets/img/gallery/image5.jpg" data-title="image5" data-lightbox="roadtrip"><img src="./assets/img/gallery/image5.jpg" width="200px" alt="image5" /></a></div>
-						<div class="filters decoration"><a href="./assets/img/gallery/image6.jpg" data-title="image6" data-lightbox="roadtrip"><img src="./assets/img/gallery/image6.jpg" width="200px" alt="image6" /></a></div>
-						<div class="filters funiture"><a href="./assets/img/gallery/image7.jpg" data-title="image7" data-lightbox="roadtrip"><img src="./assets/img/gallery/image7.jpg" width="200px" alt="image7" /></a></div>
-						<div class="filters funiture"><a href="./assets/img/gallery/image8.jpg" data-title="image8" data-lightbox="roadtrip"><img src="./assets/img/gallery/image8.jpg" width="200px" alt="image8" /></a></div>
+						<div class="filters ngapali"><a href="./assets/img/gallery/image1.jpg" data-title="image1" data-lightbox="roadtrip"><img src="./assets/img/gallery/image1.jpg" width="200px" alt="image1" /></a></div>
+						<div class="filters ngapali"><a href="./assets/img/gallery/image2.jpg" data-title="image2" data-lightbox="roadtrip"><img src="./assets/img/gallery/image2.jpg" width="200px" alt="image2" /></a></div>
+						<div class="filters ngapali"><a href="./assets/img/gallery/image3.jpg" data-title="image3" data-lightbox="roadtrip"><img src="./assets/img/gallery/image3.jpg" width="200px" alt="image3" /></a></div>
+						<div class="filters ngapali"><a href="./assets/img/gallery/image4.jpg" data-title="image4"data-lightbox="roadtrip"><img src="./assets/img/gallery/image4.jpg" width="200px" alt="image4" /></a></div>
+						<div class="filters chaungthar"><a href="./assets/img/gallery/image5.jpg" data-title="image5" data-lightbox="roadtrip"><img src="./assets/img/gallery/image5.jpg" width="200px" alt="image5" /></a></div>
+						<div class="filters chaungthar"><a href="./assets/img/gallery/image6.jpg" data-title="image6" data-lightbox="roadtrip"><img src="./assets/img/gallery/image6.jpg" width="200px" alt="image6" /></a></div>
+						<div class="filters chaungthar"><a href="./assets/img/gallery/image7.jpg" data-title="image7" data-lightbox="roadtrip"><img src="./assets/img/gallery/image7.jpg" width="200px" alt="image7" /></a></div>
+						<div class="filters chaungthar"><a href="./assets/img/gallery/image8.jpg" data-title="image8" data-lightbox="roadtrip"><img src="./assets/img/gallery/image8.jpg" width="200px" alt="image8" /></a></div>
 						<div class="filters funiture"><a href="./assets/img/gallery/image9.jpg" data-title="image9" data-lightbox="roadtrip"><img src="./assets/img/gallery/image9.jpg" width="200px" alt="image9" /></a></div>
-						<div class="filters office"><a href="./assets/img/gallery/image1.jpg" data-title="image1" data-lightbox="roadtrip"><img src="./assets/img/gallery/image1.jpg" width="200px" alt="image1" /></a></div>
-						<div class="filters office"><a href="./assets/img/gallery/image2.jpg" data-title="image2" data-lightbox="roadtrip"><img src="./assets/img/gallery/image2.jpg" width="200px" alt="image2" /></a></div>
-						<div class="filters office"><a href="./assets/img/gallery/image3.jpg" data-title="image3" data-lightbox="roadtrip"><img src="./assets/img/gallery/image3.jpg" width="200px" alt="image3" /></a></div>
-						<div class="filters decoration"><a href="./assets/img/gallery/image4.jpg" data-title="image4" data-lightbox="roadtrip"><img src="./assets/img/gallery/image4.jpg" width="200px" alt="image4" /></a></div>
-						<div class="filters decoration"><a href="./assets/img/gallery/image5.jpg" data-title="image5" data-lightbox="roadtrip"><img src="./assets/img/gallery/image5.jpg" width="200px" alt="image5" /></a></div>
-						<div class="filters house"><a href="./assets/img/gallery/image6.jpg" data-title="image6" data-lightbox="roadtrip"><img src="./assets/img/gallery/image6.jpg" width="200px" alt="image6" /></a></div>
-						<div class="filters funiture"><a href="./assets/img/gallery/image7.jpg" data-title="image7" data-lightbox="roadtrip"><img src="./assets/img/gallery/image7.jpg" width="200px" alt="image7" /></a></div>
+						<div class="filters ngapali"><a href="./assets/img/gallery/image1.jpg" data-title="image1" data-lightbox="roadtrip"><img src="./assets/img/gallery/image1.jpg" width="200px" alt="image1" /></a></div>
+						<div class="filters chaungthar"><a href="./assets/img/gallery/image2.jpg" data-title="image2" data-lightbox="roadtrip"><img src="./assets/img/gallery/image2.jpg" width="200px" alt="image2" /></a></div>
+						<div class="filters chaungthar"><a href="./assets/img/gallery/image3.jpg" data-title="image3" data-lightbox="roadtrip"><img src="./assets/img/gallery/image3.jpg" width="200px" alt="image3" /></a></div>
+						<div class="filters ngwesaung"><a href="./assets/img/gallery/image4.jpg" data-title="image4" data-lightbox="roadtrip"><img src="./assets/img/gallery/image4.jpg" width="200px" alt="image4" /></a></div>
+						<div class="filters ngwesaung"><a href="./assets/img/gallery/image5.jpg" data-title="image5" data-lightbox="roadtrip"><img src="./assets/img/gallery/image5.jpg" width="200px" alt="image5" /></a></div>
+						<div class="filters ngwesaung"><a href="./assets/img/gallery/image6.jpg" data-title="image6" data-lightbox="roadtrip"><img src="./assets/img/gallery/image6.jpg" width="200px" alt="image6" /></a></div>
+						<div class="filters ngwesaung"><a href="./assets/img/gallery/image7.jpg" data-title="image7" data-lightbox="roadtrip"><img src="./assets/img/gallery/image7.jpg" width="200px" alt="image7" /></a></div>
 					</div>
 				</div>
 
@@ -701,27 +653,68 @@ session_start();
 		</section>
 		<!-- End Hotel Section -->
 
-
-		<!-- Start Adv Section -->
+		<!-- Start Beach Section -->
 		<section class="p-5 missions">
 			<div class="container">
-				<div class="row align-items-lg-center">
-					<div class="col-lg-5">
-						<img src="./assets/img/etc/building4.png" class="homeimgs fromlefts advimages" alt="building4" />
+
+				<!-- start title -->
+
+					<div class="row text-center">
+						<div class="col">
+							<h3 class="beachtitles text-light mb-5">Beaches</h3>
+						</div>
 					</div>
-					<div class="col-lg-7 text-white text-center text-lg-end fromrights advtexts">
-						<h1>How we started our booking services in Myanmar</h1>
-						<p>We began our journey with a simple goal: to make hotel booking in Myanmar more accessible, reliable, and convenient for both local and international travelers. What started as a small initiative has grown into a trusted platform that connects guests with quality accommodations across the country, offering a seamless booking experience backed by local expertise and customer care.</p>
+
+				<!-- end title -->
+
+				<div class="row align-items-lg-center">
+
+					<div class="col-lg-5">
+						<img src="./assets/img/beach/chaungthar(2).jpg" class="fromlefts beaches rounded-image" alt="chaungthar" />
+					</div>
+					<div class="col-lg-7 text-white text-center text-lg-end fromrights">
+						<h1><span><a href="https://maps.app.goo.gl/RgESaQeFASiVfBDw8"><i class="fas fa-map-marker-alt"></i></a></span> Chaung Thar</h1>
+						<p>The long Chuang Tha Beach with white smooth sand, wearring different beautiful style compared to Ngwe Saung beach. At weekends or on vacations it is always crowded with travellers from many cities around the world. It is recommended probably to rent one boat to explore the islands surrounding, or diving to see the fish in the ocean. Visit Chaung Tha Beach with Indochina tours Myanmar. The beach itself is a long expanse of golden sand. Modern facilities can be found in bungalow type beach resort hotels. Its white sand and the blue crystal water attract the tourists to take beach leisure. There is a wide choice of standard dining places offer the fresh and reasonable. It’s ...</p>
+						<a href="./chaungthar.html" class="btn btn-info">More</a>
+					</div>
+
+				</div>
+
+				<br/>
+
+				<div class="row align-items-lg-center">
+					
+					<div class="col-lg-7 text-white text-center text-lg-start fromrights">
+						<h1>Ngwe Saung <span><a href="https://maps.app.goo.gl/YF579AkvMFJaLgEKA"><i class="fas fa-map-marker-alt"></i></a></span></h1>
+						<p>Ngwe Saung Beach, meaning "Silver Beach" in Burmese, is one of Myanmar’s most popular coastal retreats, located about five hours’ drive west of Yangon. With its long stretch of soft silver-white sand, calm blue waters, and gently swaying palm trees, Ngwe Saung offers a refreshing balance between the lively buzz of Chaung Tha and the quiet luxury of Ngapali. The beach stretches over 15 kilometers, making it one of the longest in Southeast Asia, perfect for long walks, beach cycling, or simply unwinding on a hammock under the sun. During weekends and holidays, local and international travelers alike flock here to enjoy the sea breeze and vibrant beachside atmosphere. It’s ...</p>
+						<div class="text-end mt-3">
+							<a href="./ngwesaung.html" class="btn btn-info">More</a>
+						</div>
+					</div>
+
+					<div class="col-lg-5">
+						<img src="./assets/img/beach/ngwesaung.jpg" class="fromlefts beaches rounded-image" alt="ngwesaung" />
+					</div>
+
+				</div>
+
+				<br/>
+
+				<div class="row align-items-lg-center">
+
+					<div class="col-lg-5">
+						<img src="./assets/img/beach/ngapali.jpg" class="fromlefts beaches rounded-image" alt="ngapali" />
+					</div>
+					<div class="col-lg-7 text-white text-center text-lg-end fromrights">
+						<h1><span><a href="https://maps.app.goo.gl/RgESaQeFASiVfBDw8"><i class="fas fa-map-marker-alt"></i></a></span> Ngapili</h1>
+						<p>Ngapali Beach is Myanmar’s premier beach destination, a long stretch of soft, white sand kissed by the gentle waves of the Bay of Bengal. It lies quietly along the western coast of Rakhine State, offering a peaceful and picturesque escape from the noise and pace of modern city life. Unlike Chaung Tha and Ngwe Saung, Ngapali is far less crowded, known instead for its calm, tranquil atmosphere, more luxurious beachside resorts, and natural, unspoiled charm. The beach is lined with swaying palm trees, local fishing boats, and elegant resorts that blend traditional Myanmar architecture with modern comfort. Visitors often come here not only to soak up the sun or swim in the ...</p>
+						<a href="./ngapali.html" class="btn btn-info">More</a>
 					</div>
 
 				</div>
 			</div>			
 		</section>
-		<!-- End Adv Section -->
-
-
-
-
+		<!-- End Beach Section -->
 
 		<!-- Start Client Section -->
 		<section class="p-3">
@@ -862,7 +855,7 @@ session_start();
 		<!-- End Quotation Section -->
 
 
-		<!-- Start Furniture Section -->
+		<!-- Start Service Section -->
 		<section class="bg-light text-center py-3">
 			<div class="container">
 
@@ -917,7 +910,7 @@ session_start();
 
 			</div>
 		</section>
-		<!-- End Furniture Section -->
+		<!-- End Service Section -->
 
 
 		<!-- Start Contact Section -->
