@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Hotel Booking</title>
+		<title>Beach Travel Website</title>
 		<!-- fav icon -->
 		<link href="./assets/img/fav/favicon.png" rel="icon" type="image/png" sizes="16x16" />
 		<!-- bootstrap css1 js1 -->
@@ -529,7 +529,7 @@ session_start();
 
 				<a href="index.php" class="navbar-brand text-light mx-3">
 					<img src="./assets/img/fav/favicon.png" width="70px" alt="favicon" />
-					<span class="text-uppercase h2 fw-bold mx-2 text-truncate">GoldenSands<span class="h3"> Booking</span></span>
+					<span class="text-uppercase h2 fw-bold mx-2 text-truncate">Beach Travel<span class="h3"> Website</span></span>
 				</a>
 
 				<button type="button" class="navbar-toggler navbuttons crossxs" data-bs-toggle="collapse" data-bs-target="#nav">
@@ -567,7 +567,7 @@ session_start();
 			<!-- Start Banner -->
 
 			<div class="text-light text-center text-md-end banners">
-				<h1 class="display-5 bannertheaders">Welcome to <span class="display-2 text-uppercase">GoldenSands</span> Booking Services</h1>
+				<h1 class="display-5 bannertheaders">Welcome to <span class="display-2 text-uppercase">Beach</span> Travel Services</h1>
 				<p class="lead bannerparagraphs">Connecting Travelers with the Perfect Place to Stay</p>
 			</div>
 			

@@ -26,11 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     // Upload images
     foreach ($_FILES['images']['name'] as $index => $imageName) {
         $tmpName = $_FILES['images']['tmp_name'][$index];
+        $error = $_FILES['images']['error'][$index];
+    
+        if ($error !== UPLOAD_ERR_OK) {
+            echo "Error uploading $imageName: $error<br>";
+            continue;
+        }
+    
         $targetPath = "../images/" . basename($imageName);
         if (move_uploaded_file($tmpName, $targetPath)) {
             $conn->query("INSERT INTO hotel_images (hotel_id, image) VALUES ('$hotel_id', '$imageName')");
+        } else {
+            echo "Failed to move file: $imageName<br>";
         }
-    }
+    }    
 
     header("Location: manage_hotels.php");
     exit;
