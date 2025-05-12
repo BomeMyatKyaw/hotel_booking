@@ -68,7 +68,7 @@ $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = $hotel_i
                                 $activeClass = $isFirst ? 'active' : ''; 
                                 $isFirst = false;
                             ?>
-                                <div class="carousel-item <?= $activeClass ?>" style="width: 200px;">
+                                <div class="carousel-item <?= $activeClass ?>" style="width: 250px;">
                                     <img src="../images/<?= htmlspecialchars($img['image']) ?>" 
                                         class="img-fluid rounded shadow-sm border" 
                                         alt="Hotel Image" style="height: 150px; object-fit: cover; width: 100%;">
