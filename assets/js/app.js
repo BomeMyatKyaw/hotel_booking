@@ -55,7 +55,7 @@ $(document).ready(function(){
         if(filtervalue === 'all'){
             $('.filters').show('slide',500);
         }else{
-            $('.filter').hide();
+            $('.filters').hide();
 
             $('.filter').not('.'+filtervalue).hide('slide',500);
             $('.filter').filter('.'+filtervalue).show('slide',500);

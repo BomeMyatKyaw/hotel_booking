@@ -54,7 +54,7 @@ $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = $hotel_i
 
                 <div class="mb-3">
                     <strong>Price:</strong> 
-                    <span class="text-success fw-bold fs-5">$<?= number_format($hotel['price'], 2) ?></span>
+                    <span class="text-success fw-bold fs-5"><?= number_format($hotel['price'], 2) ?> Ks</span>
                 </div>
 
                 <h4>Images</h4>

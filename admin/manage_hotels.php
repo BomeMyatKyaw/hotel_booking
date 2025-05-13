@@ -164,7 +164,7 @@ $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
                     <!-- <td><?= $hotel['id'] ?></td> -->
                     <td><?= htmlspecialchars($hotel['name']) ?></td>
                     <td><?= htmlspecialchars($hotel['description']) ?></td>
-                    <td>$<?= number_format($hotel['price'], 2) ?></td>
+                    <td><?= number_format($hotel['price'], 2) ?> Ks</td>
                     <td>
                         <?php 
                         $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = {$hotel['id']}");

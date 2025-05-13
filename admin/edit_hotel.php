@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea name="description" class="form-control" required><?= htmlspecialchars($hotel['description']) ?></textarea>
         </div>
         <div class="mb-2">
-            <label>Price</label>
+            <label>Price (Ks)</label>
             <input type="number" name="price" class="form-control" value="<?= $hotel['price'] ?>" required>
         </div>
 

@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Beach Travel Website</title>
+		<title>GOLDENSANDS Booking</title>
 		<!-- fav icon -->
 		<link href="./assets/img/fav/favicon.png" rel="icon" type="image/png" sizes="16x16" />
 		<!-- bootstrap css1 js1 -->
@@ -105,6 +105,16 @@ session_start();
 
 			.crossxs .lines3{
 				transform: rotate(45deg) translate(-6px,-6px);
+			}
+
+			.lines1,
+			.lines2,
+			.lines3 {
+				width: 25px;
+				height: 3px;
+				margin: 6px;
+				background-color: white;
+				transition: all 0.4s ease;
 			}
 
 			/* End Nav Bar */
@@ -527,16 +537,19 @@ session_start();
 			<!-- Start Nav Bar -->
 			<nav class="navbar navbar-expand-lg fixed-top">
 
-				<a href="index.php" class="navbar-brand text-light mx-3">
-					<img src="./assets/img/fav/favicon.png" width="70px" alt="favicon" />
-					<span class="text-uppercase h2 fw-bold mx-2 text-truncate">Beach Travel<span class="h3"> Website</span></span>
-				</a>
+				<div class="d-flex">
+					<a href="index.php" class="navbar-brand text-light mx-3">
+						<img src="./assets/img/fav/favicon.png" width="70px" alt="favicon" />
+						<span class="text-uppercase h2 fw-bold mx-2 text-truncate">GOLDENSANDS<span class="h3"> Service</span></span>
+					</a>
 
-				<button type="button" class="navbar-toggler navbuttons crossxs" data-bs-toggle="collapse" data-bs-target="#nav">
-					<div class="bg-light lines1"></div>
-					<div class="bg-light lines2"></div>
-					<div class="bg-light lines3"></div>
-				</button>
+					<button type="button" class="navbar-toggler navbuttons " data-bs-toggle="collapse" data-bs-target="#nav">
+						<div class="bg-light lines1"></div>
+						<div class="bg-light lines2"></div>
+						<div class="bg-light lines3"></div>
+					</button>
+				</div>
+
 
 				<div id="nav" class="navbar-collapse collapse justify-content-end text-uppercase fw-bold">
 					<ul class="navbar-nav">
@@ -567,7 +580,7 @@ session_start();
 			<!-- Start Banner -->
 
 			<div class="text-light text-center text-md-end banners">
-				<h1 class="display-5 bannertheaders">Welcome to <span class="display-2 text-uppercase">Beach</span> Travel Services</h1>
+				<h1 class="display-5 bannertheaders">Welcome to <span class="display-2 text-uppercase">GOLDENSANDS</span> Beach Travel Services</h1>
 				<p class="lead bannerparagraphs">Connecting Travelers with the Perfect Place to Stay</p>
 			</div>
 			
@@ -597,7 +610,7 @@ session_start();
 
 						<h5><i>Making Hotel Booking Simple, Secure, and Stress-Free</i></h5>
 						<p>We are a trusted hotel booking platform committed to making travel easy, affordable, and enjoyable. With a wide selection of handpicked hotels, secure payment options, and dedicated customer support, we help travelers find the perfect stay—whether it’s a luxury escape, a family vacation, or a quick weekend getaway.</p>
-						<a href="javascript:void(0);" class="btn btn-danger rounded-0">Read Me</a>
+						<a href="./aboutus.php" class="btn btn-danger rounded-0">Read Me</a>
 					</div>
 
 				</div>
@@ -625,8 +638,6 @@ session_start();
 					<li class="list-inline-item propertylists" data-filter="chaungthar">Chaung Thar <span class="mx-3 mx-md-5 text-muted">/</span></li>
 					<li class="list-inline-item propertylists" data-filter="ngwesaung">Ngwesaung</li>
 				</ul>
-
-
 
 				<div class="container-fluid">
 					<div class="d-flex flex-wrap justify-content-center">
@@ -870,37 +881,37 @@ session_start();
 
 				<div class="row funicons">
 
-					<div class="col-md-4">
+					<div class="col-md-4 p-3">
 						<img src="./assets/img/icon/double-bed.png" alt="double-bed" />
 						<h4>Luxury Rooms</h4>
 						<p>Spacious, elegant rooms with modern amenities.</p>
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-4 p-3">
 						<img src="./assets/img/icon/padlock.png" alt="padlock" />
 						<h4>Secure Booking</h4>
 						<p>Safe and encrypted online booking process.</p>
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-4 p-3">
 						<img src="./assets/img/icon/man.png" alt="man" />
 						<h4>Professional Staff</h4>
 						<p>Friendly 24/7 front desk and room service.</p>
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-4 p-3">
 						<img src="./assets/img/icon/price-tag.png" alt="price-tag" />
 						<h4>Best Price Guarantee</h4>
 						<p>Lowest prices when you book directly with us.</p>
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-4 p-3">
 						<img src="./assets/img/icon/calendar-check.png" alt="calendar-check" />
 						<h4>Flexible Cancellations</h4>
 						<p>Change your plans easily with flexible cancellation policies.</p>
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-4 p-3">
 						<img src="./assets/img/icon/award.png" alt="award" />
 						<h4>Award-Winning Service</h4>
 						<p>Recognized for outstanding hospitality.</p>
@@ -957,7 +968,7 @@ session_start();
 
 					<div class="col-md-3 col-sm-6">
 						<h5 class="mb-3"><img src="./assets/img/fav/favicon.png" width="70" alt="footericon" /> About GOLDENSANDS</h5>
-						<p class="small">GOLDENSANDS is a premium hospitality brand offering unforgettable stays along Myanmar’s most beautiful beaches. Known for its warm service, elegant accommodations, and stunning seaside views, GOLDENSANDS is the perfect escape for travelers seeking relaxation, romance, or adventure. With a focus on comfort, quality, and authentic local experiences, we welcome guests from around the world to discover the best of Myanmar’s coastal charm.</p>
+						<p class="small">GOLDENSANDS offers premium beachfront stays in Myanmar, combining elegant comfort, warm service, and authentic local charm. Discover relaxation, romance, and adventure along the country's most beautiful coasts.</p>
 					</div>
 
 					<div class="col-md-3 col-sm-6">
@@ -1007,7 +1018,8 @@ session_start();
 		<!-- bootstrap css1 js1 -->
 		<script src="./assets/libs/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 		<!-- jquery js1 -->
-		<script src="./assets/libs/jquery/jquery-3.7.1.min.js" type="text/javascript"></script>
+		<!-- <script src="./assets/libs/jquery/jquery-3.7.1.min.js" type="text/javascript"></script> -->
+		<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 		<!-- jqueryui css1 js1 -->
 		<script src="./assets/libs/jquery-ui-1.13.2/jquery-ui.min.js" type="text/javascript"></script>
 		<!-- lightbox2 css1 js1 -->
