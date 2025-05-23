@@ -6,6 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    // Sanitize input to prevent SQL injection
+    $username = $conn->real_escape_string($username);
+
     // Fetch user by username
     $sql = "SELECT * FROM users WHERE username = '$username' AND status = 'active'";
     $result = $conn->query($sql);
@@ -15,12 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Check password
         if (password_verify($password, $user['password'])) {
-            // ✅ Set session variables after successful login
+            // ✅ Set session variables
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['role'] = $user['role']; // user or admin
 
-            // Redirect to index or dashboard
-            header("Location: ../index.php");
+            // ✅ Redirect based on role
+            if ($user['role'] === 'admin') {
+                header("Location: ../admin/dashboard.php");
+            } else {
+                header("Location: ../index.php");
+            }
             exit;
         } else {
             $error = "Invalid password.";

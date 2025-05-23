@@ -212,6 +212,12 @@ session_start();
 				bottom: 0;
 			}
 
+			@media (max-width: 768px) {
+				.buildings {
+					display: none;
+				}
+			}
+
 			/* End About Us Section */
 
 			/* Start Hotels Section */
@@ -543,7 +549,7 @@ session_start();
 						<span class="text-uppercase h2 fw-bold mx-2 text-truncate">GOLDENSANDS<span class="h3"> Service</span></span>
 					</a>
 
-					<button type="button" class="navbar-toggler navbuttons " data-bs-toggle="collapse" data-bs-target="#nav">
+					<button type="button" class="navbar-toggler navbuttons" data-bs-toggle="collapse" data-bs-target="#nav">
 						<div class="bg-light lines1"></div>
 						<div class="bg-light lines2"></div>
 						<div class="bg-light lines3"></div>
@@ -684,7 +690,7 @@ session_start();
 						<img src="./assets/img/beach/chaungthar(2).jpg" class="fromlefts beaches rounded-image" alt="chaungthar" />
 					</div>
 					<div class="col-lg-7 text-white text-center text-lg-end fromrights">
-						<h1><span><a href="https://maps.app.goo.gl/RgESaQeFASiVfBDw8"><i class="fas fa-map-marker-alt"></i></a></span> Chaung Thar</h1>
+						<h1><span><a href="https://maps.app.goo.gl/RgESaQeFASiVfBDw8" target="_blank"><i class="fas fa-map-marker-alt"></i></a></span> Chaung Thar</h1>
 						<p>The long Chuang Tha Beach with white smooth sand, wearring different beautiful style compared to Ngwe Saung beach. At weekends or on vacations it is always crowded with travellers from many cities around the world. It is recommended probably to rent one boat to explore the islands surrounding, or diving to see the fish in the ocean. Visit Chaung Tha Beach with Indochina tours Myanmar. The beach itself is a long expanse of golden sand. Modern facilities can be found in bungalow type beach resort hotels. Its white sand and the blue crystal water attract the tourists to take beach leisure. There is a wide choice of standard dining places offer the fresh and reasonable. It’s ...</p>
 						<a href="./chaungthar.html" class="btn btn-info">More</a>
 					</div>
@@ -693,21 +699,22 @@ session_start();
 
 				<br/>
 
-				<div class="row align-items-lg-center">
-					
-					<div class="col-lg-7 text-white text-center text-lg-start fromrights">
-						<h1>Ngwe Saung <span><a href="https://maps.app.goo.gl/YF579AkvMFJaLgEKA"><i class="fas fa-map-marker-alt"></i></a></span></h1>
+				<div class="row align-items-lg-center flex-column flex-lg-row">
+					<!-- Image first on all devices -->
+					<div class="col-lg-5 order-1 order-lg-2">
+						<img src="./assets/img/beach/ngwesaung.jpg" class="fromlefts beaches rounded-image" alt="ngwesaung" />
+					</div>
+
+					<!-- Text second on mobile, first on large screens -->
+					<div class="col-lg-7 text-white text-center text-lg-start fromrights order-2 order-lg-1">
+						<h1>Ngwe Saung <span><a href="https://maps.app.goo.gl/YF579AkvMFJaLgEKA" target="_blank"><i class="fas fa-map-marker-alt"></i></a></span></h1>
 						<p>Ngwe Saung Beach, meaning "Silver Beach" in Burmese, is one of Myanmar’s most popular coastal retreats, located about five hours’ drive west of Yangon. With its long stretch of soft silver-white sand, calm blue waters, and gently swaying palm trees, Ngwe Saung offers a refreshing balance between the lively buzz of Chaung Tha and the quiet luxury of Ngapali. The beach stretches over 15 kilometers, making it one of the longest in Southeast Asia, perfect for long walks, beach cycling, or simply unwinding on a hammock under the sun. During weekends and holidays, local and international travelers alike flock here to enjoy the sea breeze and vibrant beachside atmosphere. It’s ...</p>
 						<div class="text-end mt-3">
 							<a href="./ngwesaung.html" class="btn btn-info">More</a>
 						</div>
 					</div>
-
-					<div class="col-lg-5">
-						<img src="./assets/img/beach/ngwesaung.jpg" class="fromlefts beaches rounded-image" alt="ngwesaung" />
-					</div>
-
 				</div>
+
 
 				<br/>
 
@@ -717,7 +724,7 @@ session_start();
 						<img src="./assets/img/beach/ngapali.jpg" class="fromlefts beaches rounded-image" alt="ngapali" />
 					</div>
 					<div class="col-lg-7 text-white text-center text-lg-end fromrights">
-						<h1><span><a href="https://maps.app.goo.gl/RgESaQeFASiVfBDw8"><i class="fas fa-map-marker-alt"></i></a></span> Ngapili</h1>
+						<h1><span><a href="https://maps.app.goo.gl/RgESaQeFASiVfBDw8" target="_blank"><i class="fas fa-map-marker-alt"></i></a></span> Ngapili</h1>
 						<p>Ngapali Beach is Myanmar’s premier beach destination, a long stretch of soft, white sand kissed by the gentle waves of the Bay of Bengal. It lies quietly along the western coast of Rakhine State, offering a peaceful and picturesque escape from the noise and pace of modern city life. Unlike Chaung Tha and Ngwe Saung, Ngapali is far less crowded, known instead for its calm, tranquil atmosphere, more luxurious beachside resorts, and natural, unspoiled charm. The beach is lined with swaying palm trees, local fishing boats, and elegant resorts that blend traditional Myanmar architecture with modern comfort. Visitors often come here not only to soak up the sun or swim in the ...</p>
 						<a href="./ngapali.html" class="btn btn-info">More</a>
 					</div>
@@ -779,18 +786,18 @@ session_start();
 
 						<div id="customercarousels" class="carousel slides" data-bs-ride="carousel">
 							
-							<ol class="carousel-indicators">
-								<li class="active" data-bs-target="#customercarousels" data-bs-slide-to="0"></li>
-								<li data-bs-target="#customercarousels" data-bs-slide-to="1"></li>
-								<li data-bs-target="#customercarousels" data-bs-slide-to="2"></li>
-							</ol>
+							<div class="carousel-indicators">
+								<button class="active" data-bs-target="#customercarousels" data-bs-slide-to="0"></button>
+								<button data-bs-target="#customercarousels" data-bs-slide-to="1"></button>
+								<button data-bs-target="#customercarousels" data-bs-slide-to="2"></button>
+							</div>
 
 							<div class="carousel-inner">
 
 								<div class="carousel-item text-center active">
 									<img src="./assets/img/users/user1.jpg" class="rounded-circle" alt="user1" />
 									<blockquote class="text-white">
-										<p>Booking my hotel through this site was so easy! I found a great place in Yangon at a great price, and the whole process was smooth from start to finish.</p>
+										<p>Booking hotel through this site was so easy! I found a great place in Yangon at a great price, and the whole process was smooth.</p>
 									</blockquote>
 									<h5 class="text-light text-uppercase fw-bold mb-3">Ms.July</h5>
 									<ul class="list-inline mb-5">
@@ -974,11 +981,10 @@ session_start();
 					<div class="col-md-3 col-sm-6">
 						<h5 class="mb-3">Visit Us</h5>
 						<ul class="list-unstyled">
-							<li><a href="javascript:void(0);" class="footerlinks">Home</a></li>
-							<li><a href="javascript:void(0);" class="footerlinks">About</a></li>
-							<li><a href="javascript:void(0);" class="footerlinks">Hotels</a></li>
-							<li><a href="javascript:void(0);" class="footerlinks">Services</a></li>
-							<li><a href="javascript:void(0);" class="footerlinks">Contact</a></li>
+							<li><a href="./index.php" class="footerlinks">Home</a></li>
+							<li><a href="./aboutus.php" class="footerlinks">About</a></li>
+							<li><a href="./user/hotels.php" class="footerlinks">Hotels</a></li>
+							<li><a href="./contactus.php" class="footerlinks">Contact</a></li>
 						</ul>
 					</div>
 
