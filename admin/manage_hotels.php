@@ -75,8 +75,20 @@ $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
     <meta charset="UTF-8">
     <title><?= $pageTitle ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/dashboardstyle.css" />
+    
     <style>
         body { font-family: Arial, sans-serif; }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            margin-left: 250px; /* Matches sidebar width */
+        }
+
         .map-responsive {
             position: relative;
             padding-bottom: 56.25%;
@@ -84,16 +96,19 @@ $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
             overflow: hidden;
             max-width: 250px;
         }
+
         .map-responsive iframe {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             border: 0;
         }
+
         .hotel-card img {
             max-height: 200px;
             object-fit: cover;
         }
+        
         .table th, .table td {
             vertical-align: middle;
         }
@@ -101,105 +116,100 @@ $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
 </head>
 <body>
 
-<?php include('layouts/sidebar.php'); ?>
+    <?php include('layouts/sidebar.php'); ?>
+    <div class="main">
+        <?php include('layouts/header.php'); ?>
 
-<div class="main">
-    <?php include('layouts/header.php'); ?>
+        <div class="container-fluid mt-4">
 
-    <div class="container mt-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Hotel Management</h2>
-            <a href="../index.php" class="btn btn-secondary">Back</a>
-        </div>
+            <!-- Add Hotel Form -->
+            <div class="card mb-4 w-100">
+                <div class="card-header">Add New Hotel</div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Hotel Name</label>
+                            <input type="text" name="name" id="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" name="price" id="price" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location_embed" class="form-label">Google Maps Embed Code</label>
+                            <textarea name="location_embed" id="location_embed" class="form-control" rows="3" placeholder="Paste Google Maps iframe code here..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="images" class="form-label">Images</label>
+                            <input type="file" name="images[]" id="images" class="form-control" multiple required>
+                        </div>
+                        <button type="submit" name="create" class="btn btn-success">Add Hotel</button>
+                    </form>
+                </div>
+            </div>
 
-        <!-- Add Hotel Form -->
-        <div class="card mb-4">
-            <div class="card-header">Add New Hotel</div>
-            <div class="card-body">
-                <form method="POST" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Hotel Name</label>
-                        <input type="text" name="name" id="name" class="form-control" required>
+            <!-- Search -->
+            <div class="mb-3">
+                <form method="GET">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search hotel..." value="<?= htmlspecialchars($search) ?>">
+                        <button class="btn btn-primary">Search</button>
                     </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="number" name="price" id="price" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="location_embed" class="form-label">Google Maps Embed Code</label>
-                        <textarea name="location_embed" id="location_embed" class="form-control" rows="3" placeholder="Paste Google Maps iframe code here..."></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="images" class="form-label">Images</label>
-                        <input type="file" name="images[]" id="images" class="form-control" multiple required>
-                    </div>
-                    <button type="submit" name="create" class="btn btn-success">Add Hotel</button>
                 </form>
+            </div>
+
+            <!-- Hotels Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-light">
+                    <tr>
+                        <!-- <th>#</th> -->
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Images</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php while ($hotel = $hotels->fetch_assoc()): ?>
+                        <tr>
+                            <!-- <td><?= $hotel['id'] ?></td> -->
+                            <td><?= htmlspecialchars($hotel['name']) ?></td>
+                            <td><?= htmlspecialchars($hotel['description']) ?></td>
+                            <td><?= number_format($hotel['price'], 2) ?> Ks</td>
+                            <td>
+                                <?php 
+                                $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = {$hotel['id']}");
+                                while ($img = $images->fetch_assoc()):
+                                ?>
+                                    <img src="../images/<?= htmlspecialchars($img['image']) ?>" width="50" class="m-1 rounded">
+                                <?php endwhile; ?>
+                            </td>
+                            <td>
+                                <?php if (!empty($hotel['location_embed'])): ?>
+                                    <div class="map-responsive"><?= $hotel['location_embed'] ?></div>
+                                <?php else: ?>
+                                    <span class="text-muted">No map</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <a href="edit_hotel.php?id=<?= $hotel['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="?delete=<?= $hotel['id'] ?>" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- Search -->
-        <div class="mb-3">
-            <form method="GET">
-                <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search hotel..." value="<?= htmlspecialchars($search) ?>">
-                    <button class="btn btn-primary">Search</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Hotels Table -->
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-light">
-                <tr>
-                    <!-- <th>#</th> -->
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Images</th>
-                    <th>Location</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php while ($hotel = $hotels->fetch_assoc()): ?>
-                    <tr>
-                        <!-- <td><?= $hotel['id'] ?></td> -->
-                        <td><?= htmlspecialchars($hotel['name']) ?></td>
-                        <td><?= htmlspecialchars($hotel['description']) ?></td>
-                        <td><?= number_format($hotel['price'], 2) ?> Ks</td>
-                        <td>
-                            <?php 
-                            $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = {$hotel['id']}");
-                            while ($img = $images->fetch_assoc()):
-                            ?>
-                                <img src="../images/<?= htmlspecialchars($img['image']) ?>" width="50" class="m-1 rounded">
-                            <?php endwhile; ?>
-                        </td>
-                        <td>
-                            <?php if (!empty($hotel['location_embed'])): ?>
-                                <div class="map-responsive"><?= $hotel['location_embed'] ?></div>
-                            <?php else: ?>
-                                <span class="text-muted">No map</span>
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <a href="edit_hotel.php?id=<?= $hotel['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="?delete=<?= $hotel['id'] ?>" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-                </tbody>
-            </table>
-        </div>
     </div>
-
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -8,7 +8,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-// Search filter
+$pageTitle = "Manage Rooms";
+
+// Search
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $searchQuery = $search ? "WHERE r.room_type LIKE '%$search%' OR h.name LIKE '%$search%'" : '';
 
@@ -74,106 +76,128 @@ $rooms = $conn->query("
     <meta charset="UTF-8">
     <title>Manage Rooms</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/dashboardstyle.css" />
     <style>
-        .room-img { max-width: 100px; max-height: 80px; object-fit: cover; }
-        .table th, .table td { vertical-align: middle; }
+        body { font-family: Arial, sans-serif; }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            margin-left: 250px; /* Matches sidebar width */
+        }
+
+        .room-img { 
+            max-width: 100px; 
+            max-height: 80px; 
+            object-fit: cover; 
+        }
+
+        .table th, .table td { 
+            vertical-align: middle; 
+        }
     </style>
 </head>
 <body>
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Room Management</h2>
-        <a href="../index.php" class="btn btn-secondary">Back</a>
-    </div>
 
-    <!-- Add Room Form -->
-    <div class="card mb-4">
-        <div class="card-header">Add New Room</div>
-        <div class="card-body">
-            <form method="POST" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="hotel_id" class="form-label">Select Hotel</label>
-                    <select name="hotel_id" id="hotel_id" class="form-select" required>
-                        <option value="">-- Choose Hotel --</option>
-                        <?php while ($hotel = $hotels->fetch_assoc()): ?>
-                            <option value="<?= $hotel['id'] ?>"><?= htmlspecialchars($hotel['name']) ?></option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="room_type" class="form-label">Room Type</label>
-                    <input type="text" name="room_type" id="room_type" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea name="description" id="description" rows="3" class="form-control" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="price" class="form-label">Price ($)</label>
-                    <input type="number" step="0.01" name="price" id="price" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label for="max_guests" class="form-label">Max Guests</label>
-                    <input type="number" name="max_guests" id="max_guests" class="form-control" value="2" required>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Room Image</label>
-                    <input type="file" name="image" id="image" class="form-control" required>
-                </div>
-                <button type="submit" name="create" class="btn btn-success">Add Room</button>
-            </form>
-        </div>
-    </div>
+    <?php include('layouts/sidebar.php'); ?>
+    <div class="main">
+        <?php include('layouts/header.php'); ?>
 
-    <!-- Search -->
-    <div class="mb-3">
-        <form method="GET">
-            <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Search room or hotel..." value="<?= htmlspecialchars($search) ?>">
-                <button class="btn btn-primary">Search</button>
+        <div class="container-fluid mt-4">
+
+            <!-- Add Room Form -->
+            <div class="card mb-4 w-100">
+                <div class="card-header">Add New Room</div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="hotel_id" class="form-label">Select Hotel</label>
+                            <select name="hotel_id" id="hotel_id" class="form-select" required>
+                                <option value="">-- Choose Hotel --</option>
+                                <?php while ($hotel = $hotels->fetch_assoc()): ?>
+                                    <option value="<?= $hotel['id'] ?>"><?= htmlspecialchars($hotel['name']) ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="room_type" class="form-label">Room Type</label>
+                            <input type="text" name="room_type" id="room_type" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description" id="description" rows="3" class="form-control" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price ($)</label>
+                            <input type="number" step="0.01" name="price" id="price" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="max_guests" class="form-label">Max Guests</label>
+                            <input type="number" name="max_guests" id="max_guests" class="form-control" value="2" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Room Image</label>
+                            <input type="file" name="image" id="image" class="form-control" required>
+                        </div>
+                        <button type="submit" name="create" class="btn btn-success">Add Room</button>
+                    </form>
+                </div>
             </div>
-        </form>
-    </div>
 
-    <!-- Room Table -->
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-light">
-                <tr>
-                    <th>Room Type</th>
-                    <th>Hotel</th>
-                    <th>Image</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Guests</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($room = $rooms->fetch_assoc()): ?>
-                <tr>
-                    <td><?= htmlspecialchars($room['room_type']) ?></td>
-                    <td><?= htmlspecialchars($room['hotel_name']) ?></td>
-                    <td>
-                        <?php if ($room['image_name']): ?>
-                            <img src="../images/<?= htmlspecialchars($room['image_name']) ?>" class="room-img rounded">
-                        <?php else: ?>
-                            <span class="text-muted">No image</span>
-                        <?php endif; ?>
-                    </td>
-                    <td><?= htmlspecialchars($room['description']) ?></td>
-                    <td>$<?= number_format($room['price'], 2) ?></td>
-                    <td><?= (int)$room['max_guests'] ?></td>
-                    <td>
-                        <a href="edit_room.php?id=<?= $room['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="?delete=<?= $room['id'] ?>" onclick="return confirm('Delete this room?')" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+            <!-- Search -->
+            <div class="mb-3">
+                <form method="GET">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search room or hotel..." value="<?= htmlspecialchars($search) ?>">
+                        <button class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Room Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Room Type</th>
+                            <th>Hotel</th>
+                            <th>Image</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Guests</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($room = $rooms->fetch_assoc()): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($room['room_type']) ?></td>
+                            <td><?= htmlspecialchars($room['hotel_name']) ?></td>
+                            <td>
+                                <?php if ($room['image_name']): ?>
+                                    <img src="../images/<?= htmlspecialchars($room['image_name']) ?>" class="room-img rounded">
+                                <?php else: ?>
+                                    <span class="text-muted">No image</span>
+                                <?php endif; ?>
+                            </td>
+                            <td><?= htmlspecialchars($room['description']) ?></td>
+                            <td>$<?= number_format($room['price'], 2) ?></td>
+                            <td><?= (int)$room['max_guests'] ?></td>
+                            <td>
+                                <a href="edit_room.php?id=<?= $room['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="?delete=<?= $room['id'] ?>" onclick="return confirm('Delete this room?')" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

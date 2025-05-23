@@ -566,8 +566,7 @@ session_start();
 						<?php if (isset($_SESSION['user_id'])): ?>
 							<li class="nav-item"><a href="user/profile.php" class="nav-link mx-2 menuitems">Profile</a></li>
 							<?php if ($_SESSION['role'] === 'admin'): ?>
-								<li class="nav-item"><a href="admin/allbookinglists.php" class="nav-link mx-2 menuitems">Lists</a></li>
-								<li class="nav-item"><a href="admin/manage_hotels.php" class="nav-link mx-2 menuitems">Manage</a></li>
+								<li class="nav-item"><a href="admin/dashboard.php" class="nav-link mx-2 menuitems">Dashboard</a></li>
 							<?php elseif ($_SESSION['role'] === 'user'): ?>
 								<li class="nav-item"><a href="user/booking_list.php" class="nav-link mx-2 menuitems">My Bookings</a></li>
 							<?php endif; ?>
