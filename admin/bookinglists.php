@@ -4,11 +4,21 @@ include('../includes/db.php');
 
 $pageTitle = "Booking Lists";
 
-// Fetch all bookings with user and hotel info
+// ✅ Handle username filter
+$nameFilter = isset($_GET['name']) ? trim($_GET['name']) : '';
+
+$where = "";
+if ($nameFilter !== '') {
+    $safeFilter = $conn->real_escape_string($nameFilter);
+    $where = "WHERE users.username LIKE '%$safeFilter%'";
+}
+
+// ✅ Fetch bookings with optional filter
 $sql = "SELECT bookings.*, hotels.name AS hotel_name, users.username
         FROM bookings 
         JOIN hotels ON bookings.hotel_id = hotels.id 
         JOIN users ON bookings.user_id = users.id 
+        $where
         ORDER BY bookings.created DESC";
 
 $result = $conn->query($sql);
@@ -18,37 +28,18 @@ $result = $conn->query($sql);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Booking Lists</title>
+    <title><?= $pageTitle ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/dashboardstyle.css" />
-
     <style>
-        body { 
-            background-color: #f8f9fa; 
-        }
-        .main { 
-            margin-left: 250px;
-        }
-        .table th, .table td { 
-            vertical-align: middle; 
-        }
-        .btn-info, .btn-danger { 
-            font-size: 0.9rem; 
-            padding: 0.4rem 1rem; 
-        }
-        .modal-content { 
-            border-radius: 10px; 
-        }
-        .modal-header { 
-            background-color: #343a40; 
-            color: #fff; 
-        }
-        .modal-footer button { 
-            border-radius: 50px; 
-        }
-        .back-btn { 
-            border-radius: 50px; 
-        }
+        body { background-color: #f8f9fa; }
+        .main { margin-left: 250px; }
+        .table th, .table td { vertical-align: middle; }
+        .btn-info, .btn-danger { font-size: 0.9rem; padding: 0.4rem 1rem; }
+        .modal-content { border-radius: 10px; }
+        .modal-header { background-color: #343a40; color: #fff; }
+        .modal-footer button { border-radius: 50px; }
+        .back-btn { border-radius: 50px; }
     </style>
 </head>
 <body>
@@ -56,8 +47,19 @@ $result = $conn->query($sql);
 <?php include('layouts/sidebar.php'); ?>
 <div class="main">
     <?php include('layouts/header.php'); ?>
-    
+
     <div class="container-fluid mt-4">
+
+        <!-- 🔍 Username Filter -->
+        <div class="mb-3">
+            <form method="get">
+                <div class="input-group" style="max-width: 400px;">
+                    <input type="text" name="name" class="form-control" placeholder="Search by username..." 
+                           value="<?= htmlspecialchars($nameFilter) ?>">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
 
         <?php if ($result->num_rows > 0): ?>
             <div class="table-responsive">
@@ -103,10 +105,6 @@ $result = $conn->query($sql);
                                         <p><strong>Updated On:</strong> <?= htmlspecialchars($booking['updated']); ?></p>
                                     </div>
                                     <div class="modal-footer d-flex justify-content-between">
-                                        <!-- <form method="POST">
-                                            <input type="hidden" name="cancel_booking_id" value="<?= $booking['id']; ?>">
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this booking?')">Cancel Booking</button>
-                                        </form> -->
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -121,7 +119,7 @@ $result = $conn->query($sql);
         <?php endif; ?>
 
     </div>
-    
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

@@ -113,35 +113,49 @@ $rooms = $conn->query("
                 <div class="card-header">Add New Room</div>
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="hotel_id" class="form-label">Select Hotel</label>
-                            <select name="hotel_id" id="hotel_id" class="form-select" required>
-                                <option value="">-- Choose Hotel --</option>
-                                <?php while ($hotel = $hotels->fetch_assoc()): ?>
-                                    <option value="<?= $hotel['id'] ?>"><?= htmlspecialchars($hotel['name']) ?></option>
-                                <?php endwhile; ?>
-                            </select>
+
+                        <div class="d-flex gap-2">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="hotel_id" class="form-label">Select Hotel</label>
+                                    <select name="hotel_id" id="hotel_id" class="form-select" required>
+                                        <option value="">-- Choose Hotel --</option>
+                                        <?php while ($hotel = $hotels->fetch_assoc()): ?>
+                                            <option value="<?= $hotel['id'] ?>"><?= htmlspecialchars($hotel['name']) ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="room_type" class="form-label">Room Type</label>
+                                    <input type="text" name="room_type" id="room_type" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Price ($)</label>
+                                    <input type="number" step="0.01" name="price" id="price" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea name="description" id="description" class="form-control" required></textarea>
+                                </div>
+                                <div>
+                                    <label for="max_guests" class="form-label">Max Guests</label>
+                                    <input type="number" name="max_guests" id="max_guests" class="form-control" value="2" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Room Image</label>
+                                    <input type="file" name="image" id="image" class="form-control" required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="room_type" class="form-label">Room Type</label>
-                            <input type="text" name="room_type" id="room_type" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea name="description" id="description" rows="3" class="form-control" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="price" class="form-label">Price ($)</label>
-                            <input type="number" step="0.01" name="price" id="price" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="max_guests" class="form-label">Max Guests</label>
-                            <input type="number" name="max_guests" id="max_guests" class="form-control" value="2" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="image" class="form-label">Room Image</label>
-                            <input type="file" name="image" id="image" class="form-control" required>
-                        </div>
+
+                        
+                        
+                        
+                        
+                        
+                        
                         <button type="submit" name="create" class="btn btn-success">Add Room</button>
                     </form>
                 </div>

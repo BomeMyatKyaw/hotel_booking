@@ -108,10 +108,6 @@ $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
             max-height: 200px;
             object-fit: cover;
         }
-        
-        .table th, .table td {
-            vertical-align: middle;
-        }
     </style>
 </head>
 <body>
@@ -127,27 +123,38 @@ $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
                 <div class="card-header">Add New Hotel</div>
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Hotel Name</label>
-                            <input type="text" name="name" id="name" class="form-control" required>
+
+                        <div class="d-flex gap-2 mb-2">
+                            <div class="col-md-6">
+                                <div>
+                                    <label for="name" class="form-label">Hotel Name</label>
+                                    <input type="text" name="name" id="name" class="form-control" required>
+                                </div>
+                                <div>
+                                    <label for="price" class="form-label">Price</label>
+                                    <input type="number" name="price" id="price" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="price" class="form-label">Price</label>
-                            <input type="number" name="price" id="price" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
+                        
+                        <div>
                             <label for="location_embed" class="form-label">Google Maps Embed Code</label>
-                            <textarea name="location_embed" id="location_embed" class="form-control" rows="3" placeholder="Paste Google Maps iframe code here..."></textarea>
+                            <textarea name="location_embed" id="location_embed" class="form-control" placeholder="Paste Google Maps iframe code here..."></textarea>
                         </div>
+
                         <div class="mb-3">
                             <label for="images" class="form-label">Images</label>
                             <input type="file" name="images[]" id="images" class="form-control" multiple required>
                         </div>
+
                         <button type="submit" name="create" class="btn btn-success">Add Hotel</button>
+
                     </form>
                 </div>
             </div>
@@ -167,7 +174,6 @@ $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
                 <table class="table table-bordered table-striped">
                     <thead class="table-light">
                     <tr>
-                        <!-- <th>#</th> -->
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
@@ -179,10 +185,9 @@ $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
                     <tbody>
                     <?php while ($hotel = $hotels->fetch_assoc()): ?>
                         <tr>
-                            <!-- <td><?= $hotel['id'] ?></td> -->
                             <td><?= htmlspecialchars($hotel['name']) ?></td>
                             <td><?= htmlspecialchars($hotel['description']) ?></td>
-                            <td><?= number_format($hotel['price'], 2) ?> Ks</td>
+                            <td><?= number_format($hotel['price'], 2) ?>Ks</td>
                             <td>
                                 <?php 
                                 $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = {$hotel['id']}");
@@ -198,8 +203,8 @@ $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
                                     <span class="text-muted">No map</span>
                                 <?php endif; ?>
                             </td>
-                            <td>
-                                <a href="edit_hotel.php?id=<?= $hotel['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                            <td class="d-flex justify-content-center">
+                                <a href="edit_hotel.php?id=<?= $hotel['id'] ?>" class="btn btn-sm btn-warning mx-2">Edit</a>
                                 <a href="?delete=<?= $hotel['id'] ?>" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
