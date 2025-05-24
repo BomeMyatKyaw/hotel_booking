@@ -1,72 +1,72 @@
 <?php
-session_start();
-include('../includes/db.php');
+    session_start();
+    include('../includes/db.php');
 
-// Redirect if not admin
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php");
-    exit;
-}
-
-$pageTitle = "Manage Hotels";
-
-// Search
-$search = isset($_GET['search']) ? $_GET['search'] : '';
-$searchQuery = $search ? "WHERE name LIKE '%$search%'" : '';
-
-// Insert hotel and images
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $location_embed = $conn->real_escape_string($_POST['location_embed']);
-
-    // Insert the hotel
-    $conn->query("INSERT INTO hotels (name, description, price, location_embed) VALUES ('$name', '$description', '$price', '$location_embed')");
-    $hotel_id = $conn->insert_id;
-
-    // Upload images
-    foreach ($_FILES['images']['name'] as $index => $imageName) {
-        $tmpName = $_FILES['images']['tmp_name'][$index];
-        $error = $_FILES['images']['error'][$index];
-    
-        if ($error !== UPLOAD_ERR_OK) {
-            echo "Error uploading $imageName: $error<br>";
-            continue;
-        }
-    
-        $targetPath = "../images/" . basename($imageName);
-        if (move_uploaded_file($tmpName, $targetPath)) {
-            $conn->query("INSERT INTO hotel_images (hotel_id, image) VALUES ('$hotel_id', '$imageName')");
-        } else {
-            echo "Failed to move file: $imageName<br>";
-        }
-    }    
-
-    header("Location: manage_hotels.php");
-    exit;
-}
-
-// Delete hotel
-if (isset($_GET['delete'])) {
-    $id = (int)$_GET['delete'];
-
-    $result = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = $id");
-    while ($row = $result->fetch_assoc()) {
-        $imagePath = "../images/" . $row['image'];
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
-        }
+    // Redirect if not admin
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header("Location: ../index.php");
+        exit;
     }
 
-    $conn->query("DELETE FROM hotel_images WHERE hotel_id = $id");
-    $conn->query("DELETE FROM hotels WHERE id = $id");
+    $pageTitle = "Manage Hotels";
 
-    header("Location: manage_hotels.php");
-    exit;
-}
+    // Search
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $searchQuery = $search ? "WHERE name LIKE '%$search%'" : '';
 
-$hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
+    // Insert hotel and images
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $location_embed = $conn->real_escape_string($_POST['location_embed']);
+
+        // Insert the hotel
+        $conn->query("INSERT INTO hotels (name, description, price, location_embed) VALUES ('$name', '$description', '$price', '$location_embed')");
+        $hotel_id = $conn->insert_id;
+
+        // Upload images
+        foreach ($_FILES['images']['name'] as $index => $imageName) {
+            $tmpName = $_FILES['images']['tmp_name'][$index];
+            $error = $_FILES['images']['error'][$index];
+        
+            if ($error !== UPLOAD_ERR_OK) {
+                echo "Error uploading $imageName: $error<br>";
+                continue;
+            }
+        
+            $targetPath = "../images/" . basename($imageName);
+            if (move_uploaded_file($tmpName, $targetPath)) {
+                $conn->query("INSERT INTO hotel_images (hotel_id, image) VALUES ('$hotel_id', '$imageName')");
+            } else {
+                echo "Failed to move file: $imageName<br>";
+            }
+        }    
+
+        header("Location: manage_hotels.php");
+        exit;
+    }
+
+    // Delete hotel
+    if (isset($_GET['delete'])) {
+        $id = (int)$_GET['delete'];
+
+        $result = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = $id");
+        while ($row = $result->fetch_assoc()) {
+            $imagePath = "../images/" . $row['image'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $conn->query("DELETE FROM hotel_images WHERE hotel_id = $id");
+        $conn->query("DELETE FROM hotels WHERE id = $id");
+
+        header("Location: manage_hotels.php");
+        exit;
+    }
+
+    $hotels = $conn->query("SELECT * FROM hotels $searchQuery ORDER BY id ASC");
 ?>
 
 <!DOCTYPE html>

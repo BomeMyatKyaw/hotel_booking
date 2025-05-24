@@ -1,55 +1,55 @@
 <?php
-session_start();
-include('../includes/db.php');
+    session_start();
+    include('../includes/db.php');
 
-// Only allow access if admin is logged in
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php");
-    exit;
-}
-
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    echo "Invalid hotel ID.";
-    exit;
-}
-
-$id = (int)$_GET['id'];
-
-// Fetch hotel by ID
-$hotel = $conn->query("SELECT * FROM hotels WHERE id = $id")->fetch_assoc();
-
-// Check if hotel exists
-if (!$hotel) {
-    echo "Hotel not found.";
-    exit;
-}
-
-// Fetch hotel images
-$images = $conn->query("SELECT * FROM hotel_images WHERE hotel_id = $id");
-
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-
-    $conn->query("UPDATE hotels SET name='$name', description='$description', price='$price' WHERE id=$id");
-
-    // Upload new images if any
-    if (!empty($_FILES['images']['name'][0])) {
-        foreach ($_FILES['images']['name'] as $index => $imageName) {
-            $tmpName = $_FILES['images']['tmp_name'][$index];
-            $targetPath = "../images/" . basename($imageName);
-
-            if (move_uploaded_file($tmpName, $targetPath)) {
-                $conn->query("INSERT INTO hotel_images (hotel_id, image) VALUES ($id, '$imageName')");
-            }
-        }
+    // Only allow access if admin is logged in
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header("Location: ../index.php");
+        exit;
     }
 
-    header("Location: manage_hotels.php");
-    exit;
-}
+    if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        echo "Invalid hotel ID.";
+        exit;
+    }
+
+    $id = (int)$_GET['id'];
+
+    // Fetch hotel by ID
+    $hotel = $conn->query("SELECT * FROM hotels WHERE id = $id")->fetch_assoc();
+
+    // Check if hotel exists
+    if (!$hotel) {
+        echo "Hotel not found.";
+        exit;
+    }
+
+    // Fetch hotel images
+    $images = $conn->query("SELECT * FROM hotel_images WHERE hotel_id = $id");
+
+    // Handle form submission
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+
+        $conn->query("UPDATE hotels SET name='$name', description='$description', price='$price' WHERE id=$id");
+
+        // Upload new images if any
+        if (!empty($_FILES['images']['name'][0])) {
+            foreach ($_FILES['images']['name'] as $index => $imageName) {
+                $tmpName = $_FILES['images']['tmp_name'][$index];
+                $targetPath = "../images/" . basename($imageName);
+
+                if (move_uploaded_file($tmpName, $targetPath)) {
+                    $conn->query("INSERT INTO hotel_images (hotel_id, image) VALUES ($id, '$imageName')");
+                }
+            }
+        }
+
+        header("Location: manage_hotels.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>

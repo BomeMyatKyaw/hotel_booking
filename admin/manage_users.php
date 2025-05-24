@@ -1,67 +1,67 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header('Location: ../index.php');
-    exit;
-}
+    session_start();
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header('Location: ../index.php');
+        exit;
+    }
 
-include('../includes/db.php');
-$pageTitle = "Manage Users";
+    include('../includes/db.php');
+    $pageTitle = "Manage Users";
 
-// ✅ Handle Status Update
-if (isset($_POST['update_status'])) {
-    $id = intval($_POST['user_id']);
-    $newStatus = $_POST['status'] === 'active' ? 'active' : 'inactive';
-    $stmt = $conn->prepare("UPDATE users SET status = ? WHERE id = ?");
-    $stmt->bind_param("si", $newStatus, $id);
-    $stmt->execute();
-}
+    // Handle Status Update
+    if (isset($_POST['update_status'])) {
+        $id = intval($_POST['user_id']);
+        $newStatus = $_POST['status'] === 'active' ? 'active' : 'inactive';
+        $stmt = $conn->prepare("UPDATE users SET status = ? WHERE id = ?");
+        $stmt->bind_param("si", $newStatus, $id);
+        $stmt->execute();
+    }
 
-// ✅ Handle Role Update
-if (isset($_POST['update_role'])) {
-    $id = intval($_POST['user_id']);
-    $role = $_POST['role'] === 'admin' ? 'admin' : 'user';
-    $stmt = $conn->prepare("UPDATE users SET role = ? WHERE id = ?");
-    $stmt->bind_param("si", $role, $id);
-    $stmt->execute();
-}
+    // Handle Role Update
+    if (isset($_POST['update_role'])) {
+        $id = intval($_POST['user_id']);
+        $role = $_POST['role'] === 'admin' ? 'admin' : 'user';
+        $stmt = $conn->prepare("UPDATE users SET role = ? WHERE id = ?");
+        $stmt->bind_param("si", $role, $id);
+        $stmt->execute();
+    }
 
-// ✅ Name Filter
-$nameFilter = isset($_GET['name']) ? trim($_GET['name']) : '';
-$nameSQL = $nameFilter ? "WHERE username LIKE ?" : '';
+    // Name Filter
+    $nameFilter = isset($_GET['name']) ? trim($_GET['name']) : '';
+    $nameSQL = $nameFilter ? "WHERE username LIKE ?" : '';
 
-// ✅ Pagination
-$limit = 12;
-$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
-$offset = ($page - 1) * $limit;
+    // Pagination
+    $limit = 12;
+    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+    $offset = ($page - 1) * $limit;
 
-// ✅ Count total users with optional filter
-$countStmt = $nameFilter
-    ? $conn->prepare("SELECT COUNT(*) AS total FROM users WHERE username LIKE ?")
-    : $conn->prepare("SELECT COUNT(*) AS total FROM users");
+    // Count total users with optional filter
+    $countStmt = $nameFilter
+        ? $conn->prepare("SELECT COUNT(*) AS total FROM users WHERE username LIKE ?")
+        : $conn->prepare("SELECT COUNT(*) AS total FROM users");
 
-if ($nameFilter) {
-    $like = '%' . $nameFilter . '%';
-    $countStmt->bind_param("s", $like);
-}
-$countStmt->execute();
-$totalUsersResult = $countStmt->get_result();
-$totalUsersRow = $totalUsersResult->fetch_assoc();
-$totalUsersCount = $totalUsersRow['total'];
-$totalPages = ceil($totalUsersCount / $limit);
+    if ($nameFilter) {
+        $like = '%' . $nameFilter . '%';
+        $countStmt->bind_param("s", $like);
+    }
+    $countStmt->execute();
+    $totalUsersResult = $countStmt->get_result();
+    $totalUsersRow = $totalUsersResult->fetch_assoc();
+    $totalUsersCount = $totalUsersRow['total'];
+    $totalPages = ceil($totalUsersCount / $limit);
 
-// ✅ Fetch Users with Pagination and Filter
-$userStmt = $nameFilter
-    ? $conn->prepare("SELECT * FROM users WHERE username LIKE ? ORDER BY id ASC LIMIT ? OFFSET ?")
-    : $conn->prepare("SELECT * FROM users ORDER BY id ASC LIMIT ? OFFSET ?");
+    // Fetch Users with Pagination and Filter
+    $userStmt = $nameFilter
+        ? $conn->prepare("SELECT * FROM users WHERE username LIKE ? ORDER BY id ASC LIMIT ? OFFSET ?")
+        : $conn->prepare("SELECT * FROM users ORDER BY id ASC LIMIT ? OFFSET ?");
 
-if ($nameFilter) {
-    $userStmt->bind_param("sii", $like, $limit, $offset);
-} else {
-    $userStmt->bind_param("ii", $limit, $offset);
-}
-$userStmt->execute();
-$users = $userStmt->get_result();
+    if ($nameFilter) {
+        $userStmt->bind_param("sii", $like, $limit, $offset);
+    } else {
+        $userStmt->bind_param("ii", $limit, $offset);
+    }
+    $userStmt->execute();
+    $users = $userStmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -154,7 +154,7 @@ $users = $userStmt->get_result();
     <div style="margin-bottom: 20px;">
         <form method="get">
             <div style="display: flex; max-width: 400px;">
-                <input type="text" name="name" placeholder="Search username..." value="<?= htmlspecialchars($nameFilter) ?>" 
+                <input type="text" name="name" placeholder="Search by username..." value="<?= htmlspecialchars($nameFilter) ?>" 
                     style="flex: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px 0 0 4px;">
                 <button type="submit" 
                         style="padding: 8px 16px; background-color: #007bff; color: white; border: 1px solid #007bff; border-radius: 0 4px 4px 0; cursor: pointer;">
@@ -182,7 +182,7 @@ $users = $userStmt->get_result();
                 <td><?= htmlspecialchars($user['username']) ?></td>
                 <td><?= htmlspecialchars($user['email']) ?></td>
 
-                <!-- 🔁 Role Dropdown -->
+                <!-- Role Dropdown -->
                 <td>
                     <form method="post">
                         <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
@@ -194,7 +194,7 @@ $users = $userStmt->get_result();
                     </form>
                 </td>
 
-                <!-- ✅ Toggle Switch for Status -->
+                <!-- Toggle Switch for Status -->
                 <td>
                     <form method="post">
                         <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
@@ -211,7 +211,7 @@ $users = $userStmt->get_result();
         </tbody>
     </table>
 
-    <!-- 🔄 Pagination with Filter -->
+    <!-- Pagination with Filter -->
     <div class="pagination">
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
             <a href="?page=<?= $i ?>&name=<?= urlencode($nameFilter) ?>" class="<?= $i == $page ? 'active' : '' ?>"><?= $i ?></a>

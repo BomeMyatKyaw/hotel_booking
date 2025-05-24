@@ -1,27 +1,27 @@
 <?php
-session_start();
-include('../includes/db.php');
+    session_start();
+    include('../includes/db.php');
 
-$pageTitle = "Booking Lists";
+    $pageTitle = "Booking Lists";
 
-// ✅ Handle username filter
-$nameFilter = isset($_GET['name']) ? trim($_GET['name']) : '';
+    // ✅ Handle username filter
+    $nameFilter = isset($_GET['name']) ? trim($_GET['name']) : '';
 
-$where = "";
-if ($nameFilter !== '') {
-    $safeFilter = $conn->real_escape_string($nameFilter);
-    $where = "WHERE users.username LIKE '%$safeFilter%'";
-}
+    $where = "";
+    if ($nameFilter !== '') {
+        $safeFilter = $conn->real_escape_string($nameFilter);
+        $where = "WHERE users.username LIKE '%$safeFilter%'";
+    }
 
-// ✅ Fetch bookings with optional filter
-$sql = "SELECT bookings.*, hotels.name AS hotel_name, users.username
-        FROM bookings 
-        JOIN hotels ON bookings.hotel_id = hotels.id 
-        JOIN users ON bookings.user_id = users.id 
-        $where
-        ORDER BY bookings.created DESC";
+    // ✅ Fetch bookings with optional filter
+    $sql = "SELECT bookings.*, hotels.name AS hotel_name, users.username
+            FROM bookings 
+            JOIN hotels ON bookings.hotel_id = hotels.id 
+            JOIN users ON bookings.user_id = users.id 
+            $where
+            ORDER BY bookings.created DESC";
 
-$result = $conn->query($sql);
+    $result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>

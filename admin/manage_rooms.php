@@ -1,73 +1,73 @@
 <?php
-session_start();
-include('../includes/db.php');
+    session_start();
+    include('../includes/db.php');
 
-// Redirect if not admin
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php");
-    exit;
-}
+    // Redirect if not admin
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header("Location: ../index.php");
+        exit;
+    }
 
-$pageTitle = "Manage Rooms";
+    $pageTitle = "Manage Rooms";
 
-// Search
-$search = isset($_GET['search']) ? $_GET['search'] : '';
-$searchQuery = $search ? "WHERE r.room_type LIKE '%$search%' OR h.name LIKE '%$search%'" : '';
+    // Search
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $searchQuery = $search ? "WHERE r.room_type LIKE '%$search%' OR h.name LIKE '%$search%'" : '';
 
-// Add room
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
-    $hotel_id = $_POST['hotel_id'];
-    $room_type = $_POST['room_type'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $max_guests = $_POST['max_guests'];
-    $image_name = '';
+    // Add room
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
+        $hotel_id = $_POST['hotel_id'];
+        $room_type = $_POST['room_type'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $max_guests = $_POST['max_guests'];
+        $image_name = '';
 
-    // Handle image upload
-    if (!empty($_FILES['image']['name'])) {
-        $image_name = basename($_FILES['image']['name']);
-        $target = '../images/' . $image_name;
+        // Handle image upload
+        if (!empty($_FILES['image']['name'])) {
+            $image_name = basename($_FILES['image']['name']);
+            $target = '../images/' . $image_name;
 
-        if (!move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            echo "Failed to upload image.";
-            exit;
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+                echo "Failed to upload image.";
+                exit;
+            }
         }
+
+        $stmt = $conn->prepare("INSERT INTO rooms (hotel_id, room_type, description, price, max_guests, image_name) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("issdis", $hotel_id, $room_type, $description, $price, $max_guests, $image_name);
+        $stmt->execute();
+        $stmt->close();
+
+        header("Location: manage_room.php");
+        exit;
     }
 
-    $stmt = $conn->prepare("INSERT INTO rooms (hotel_id, room_type, description, price, max_guests, image_name) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("issdis", $hotel_id, $room_type, $description, $price, $max_guests, $image_name);
-    $stmt->execute();
-    $stmt->close();
+    // Delete room
+    if (isset($_GET['delete'])) {
+        $id = (int)$_GET['delete'];
 
-    header("Location: manage_room.php");
-    exit;
-}
+        // Delete image file
+        $res = $conn->query("SELECT image_name FROM rooms WHERE id = $id");
+        $img = $res->fetch_assoc();
+        if ($img && file_exists("../images/" . $img['image_name'])) {
+            unlink("../images/" . $img['image_name']);
+        }
 
-// Delete room
-if (isset($_GET['delete'])) {
-    $id = (int)$_GET['delete'];
-
-    // Delete image file
-    $res = $conn->query("SELECT image_name FROM rooms WHERE id = $id");
-    $img = $res->fetch_assoc();
-    if ($img && file_exists("../images/" . $img['image_name'])) {
-        unlink("../images/" . $img['image_name']);
+        $conn->query("DELETE FROM rooms WHERE id = $id");
+        header("Location: manage_room.php");
+        exit;
     }
 
-    $conn->query("DELETE FROM rooms WHERE id = $id");
-    header("Location: manage_room.php");
-    exit;
-}
-
-// Get hotel list and rooms
-$hotels = $conn->query("SELECT id, name FROM hotels");
-$rooms = $conn->query("
-    SELECT r.*, h.name AS hotel_name 
-    FROM rooms r 
-    JOIN hotels h ON r.hotel_id = h.id 
-    $searchQuery
-    ORDER BY r.id DESC
-");
+    // Get hotel list and rooms
+    $hotels = $conn->query("SELECT id, name FROM hotels");
+    $rooms = $conn->query("
+        SELECT r.*, h.name AS hotel_name 
+        FROM rooms r 
+        JOIN hotels h ON r.hotel_id = h.id 
+        $searchQuery
+        ORDER BY r.id DESC
+    ");
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +130,7 @@ $rooms = $conn->query("
                                     <input type="text" name="room_type" id="room_type" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="price" class="form-label">Price ($)</label>
+                                    <label for="price" class="form-label">Price (Ks)</label>
                                     <input type="number" step="0.01" name="price" id="price" class="form-control" required>
                                 </div>
                             </div>
