@@ -5,7 +5,7 @@
         exit;
     }
 
-    include('../includes/db.php'); // ✅ Add this line
+    include('../includes/db.php');
 
     $pageTitle = "Dashboard Overview";
 
@@ -14,8 +14,8 @@
     $userData = $userQuery->fetch_assoc();
     $totalUsers = $userData['total_users'] ?? 0;
 
-    // Calculate total revenue from bookings (example table: bookings)
-    $revenueQuery = $conn->query("SELECT SUM(total_price) as total_revenue FROM bookings");
+    // Calculate total revenue from bookings
+    $revenueQuery = $conn->query("SELECT SUM(total_price) as total_revenue FROM bookings WHERE status = 'paid'");
     $revenueData = $revenueQuery->fetch_assoc();
     $totalRevenue = $revenueData['total_revenue'] ?? 0;
 ?>

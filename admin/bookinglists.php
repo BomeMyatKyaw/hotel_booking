@@ -4,7 +4,7 @@
 
     $pageTitle = "Booking Lists";
 
-    // ✅ Handle username filter
+    // Handle username filter
     $nameFilter = isset($_GET['name']) ? trim($_GET['name']) : '';
 
     $where = "";
@@ -13,7 +13,7 @@
         $where = "WHERE users.username LIKE '%$safeFilter%'";
     }
 
-    // ✅ Fetch bookings with optional filter
+    // Fetch bookings with optional filter
     $sql = "SELECT bookings.*, hotels.name AS hotel_name, users.username
             FROM bookings 
             JOIN hotels ON bookings.hotel_id = hotels.id 
@@ -50,7 +50,7 @@
 
     <div class="container-fluid mt-4">
 
-        <!-- 🔍 Username Filter -->
+        <!-- Username Filter -->
         <div class="mb-3">
             <form method="get">
                 <div class="input-group" style="max-width: 400px;">
