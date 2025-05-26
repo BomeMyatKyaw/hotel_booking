@@ -32,14 +32,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/dashboardstyle.css" />
     <style>
-        body { background-color: #f8f9fa; }
-        .main { margin-left: 250px; }
-        .table th, .table td { vertical-align: middle; }
-        .btn-info, .btn-danger { font-size: 0.9rem; padding: 0.4rem 1rem; }
-        .modal-content { border-radius: 10px; }
-        .modal-header { background-color: #343a40; color: #fff; }
-        .modal-footer button { border-radius: 50px; }
-        .back-btn { border-radius: 50px; }
+        body { 
+            background-color: #f8f9fa; 
+        }
+        .main { 
+            margin-left: 250px; 
+        }
+        .table th, .table td { 
+            vertical-align: middle; 
+        }
+        .btn-info, .btn-danger { 
+            font-size: 0.9rem; 
+            padding: 0.4rem 1rem; 
+        }
+        .modal-content { 
+            border-radius: 10px; 
+        }
+        .modal-header { 
+            background-color: #343a40; 
+            color: #fff; 
+        }
+        .modal-footer button { 
+            border-radius: 50px; 
+        }
+        .back-btn { 
+            border-radius: 50px; 
+        }
     </style>
 </head>
 <body>

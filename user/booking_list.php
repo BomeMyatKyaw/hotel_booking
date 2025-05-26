@@ -42,14 +42,33 @@ $result = $conn->query($sql);
     <title>Your Bookings</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; }
-        main { padding: 20px; }
-        .btn-sm { font-size: 0.9rem; padding: 0.35rem 0.75rem; }
-        .badge { font-size: 0.85rem; }
-        .modal-content { border-radius: 10px; }
-        .modal-header { background-color: #343a40; color: #fff; }
-        .back-btn { border-radius: 50px; }
-        form { display: inline-block; margin-right: 4px; }
+        body { 
+            background-color: #f8f9fa; 
+        }
+        main { 
+            padding: 20px; 
+        }
+        .btn-sm { 
+            font-size: 0.9rem; 
+            padding: 0.35rem 0.75rem; 
+        }
+        .badge { 
+            font-size: 0.85rem; 
+        }
+        .modal-content { 
+            border-radius: 10px; 
+        }
+        .modal-header { 
+            background-color: #343a40; 
+            color: #fff; 
+        }
+        .back-btn { 
+            border-radius: 50px; 
+        }
+        form { 
+            display: inline-block; 
+            margin-right: 4px; 
+        }
     </style>
 </head>
 <body>
