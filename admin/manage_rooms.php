@@ -149,14 +149,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        
-                        
-                        
-                        
-                        
-                        
                         <button type="submit" name="create" class="btn btn-success">Add Room</button>
+
                     </form>
                 </div>
             </div>
@@ -180,7 +174,7 @@
                             <th>Hotel</th>
                             <th>Image</th>
                             <th>Description</th>
-                            <th>Price</th>
+                            <th>Price (Ks)</th>
                             <th>Guests</th>
                             <th>Actions</th>
                         </tr>
@@ -198,7 +192,7 @@
                                 <?php endif; ?>
                             </td>
                             <td><?= htmlspecialchars($room['description']) ?></td>
-                            <td>$<?= number_format($room['price'], 2) ?></td>
+                            <td><?= number_format($room['price'], 2) ?> Ks</td>
                             <td><?= (int)$room['max_guests'] ?></td>
                             <td>
                                 <a href="edit_room.php?id=<?= $room['id'] ?>" class="btn btn-sm btn-warning">Edit</a>

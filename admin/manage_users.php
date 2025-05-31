@@ -164,50 +164,49 @@
         </form>
     </div>
 
-
     <table>
         <thead>
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Status</th>
-        </tr>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
         </thead>
         <tbody>
-        <?php while ($user = $users->fetch_assoc()): ?>
-            <tr>
-                <td><?= $user['id'] ?></td>
-                <td><?= htmlspecialchars($user['username']) ?></td>
-                <td><?= htmlspecialchars($user['email']) ?></td>
+            <?php while ($user = $users->fetch_assoc()): ?>
+                <tr>
+                    <td><?= $user['id'] ?></td>
+                    <td><?= htmlspecialchars($user['username']) ?></td>
+                    <td><?= htmlspecialchars($user['email']) ?></td>
 
-                <!-- Role Dropdown -->
-                <td>
-                    <form method="post">
-                        <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-                        <select name="role" onchange="this.form.submit()">
-                            <option value="user" <?= $user['role'] === 'user' ? 'selected' : '' ?>>User</option>
-                            <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
-                        </select>
-                        <input type="hidden" name="update_role" value="1">
-                    </form>
-                </td>
+                    <!-- Role Dropdown -->
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                            <select name="role" onchange="this.form.submit()">
+                                <option value="user" <?= $user['role'] === 'user' ? 'selected' : '' ?>>User</option>
+                                <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
+                            </select>
+                            <input type="hidden" name="update_role" value="1">
+                        </form>
+                    </td>
 
-                <!-- Toggle Switch for Status -->
-                <td>
-                    <form method="post">
-                        <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-                        <input type="hidden" name="update_status" value="1">
-                        <input type="hidden" name="status" value="<?= $user['status'] === 'active' ? 'inactive' : 'active' ?>">
-                        <label class="switch">
-                            <input type="checkbox" onchange="this.form.submit()" <?= $user['status'] === 'active' ? 'checked' : '' ?>>
-                            <span class="slider"></span>
-                        </label>
-                    </form>
-                </td>
-            </tr>
-        <?php endwhile; ?>
+                    <!-- Toggle Switch for Status -->
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                            <input type="hidden" name="update_status" value="1">
+                            <input type="hidden" name="status" value="<?= $user['status'] === 'active' ? 'inactive' : 'active' ?>">
+                            <label class="switch">
+                                <input type="checkbox" onchange="this.form.submit()" <?= $user['status'] === 'active' ? 'checked' : '' ?>>
+                                <span class="slider"></span>
+                            </label>
+                        </form>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
         </tbody>
     </table>
 

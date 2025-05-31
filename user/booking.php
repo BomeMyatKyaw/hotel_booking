@@ -51,64 +51,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Booking</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hotel Booking</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
 
-<div class="container mt-5">
-    <h2 class="text-center">Book Your Stay at <?= htmlspecialchars($hotel['name']) ?></h2>
+        <div class="container mt-5">
+            <h2 class="text-center">Book Your Stay at <?= htmlspecialchars($hotel['name']) ?></h2>
 
-    <!-- Booking Form -->
-    <form method="POST" action="./booking.php?hotel_id=<?= $hotel['id'] ?>" class="mt-4">
-        <div class="mb-3">
-            <label for="check_in" class="form-label">Check-in Date</label>
-            <input type="date" name="check_in" id="check_in" class="form-control" required>
+            <!-- Booking Form -->
+            <form method="POST" action="./booking.php?hotel_id=<?= $hotel['id'] ?>" class="mt-4">
+                <div class="mb-3">
+                    <label for="check_in" class="form-label">Check-in Date</label>
+                    <input type="date" name="check_in" id="check_in" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="check_out" class="form-label">Check-out Date</label>
+                    <input type="date" name="check_out" id="check_out" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="total_price" class="form-label">Total Price</label>
+                    <input type="text" id="total_price" class="form-control" value="$0.00" readonly>
+                </div>
+                <button type="submit" class="btn btn-primary">Book Now</button>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="check_out" class="form-label">Check-out Date</label>
-            <input type="date" name="check_out" id="check_out" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="total_price" class="form-label">Total Price</label>
-            <input type="text" id="total_price" class="form-control" value="$0.00" readonly>
-        </div>
-        <button type="submit" class="btn btn-primary">Book Now</button>
-    </form>
-</div>
 
-<script>
-// Calculate the total price when check-in or check-out dates change
-document.getElementById('check_in').addEventListener('change', calculateTotalPrice);
-document.getElementById('check_out').addEventListener('change', calculateTotalPrice);
+        <script>
+            // Calculate the total price when check-in or check-out dates change
+            document.getElementById('check_in').addEventListener('change', calculateTotalPrice);
+            document.getElementById('check_out').addEventListener('change', calculateTotalPrice);
 
-function calculateTotalPrice() {
-    const checkInDate = document.getElementById('check_in').value;
-    const checkOutDate = document.getElementById('check_out').value;
+            function calculateTotalPrice() {
+                const checkInDate = document.getElementById('check_in').value;
+                const checkOutDate = document.getElementById('check_out').value;
 
-    if (checkInDate && checkOutDate) {
-        const checkIn = new Date(checkInDate);
-        const checkOut = new Date(checkOutDate);
+                if (checkInDate && checkOutDate) {
+                    const checkIn = new Date(checkInDate);
+                    const checkOut = new Date(checkOutDate);
 
-        const timeDifference = checkOut - checkIn;
-        const numNights = timeDifference / (1000 * 3600 * 24); // Convert ms to days
+                    const timeDifference = checkOut - checkIn;
+                    const numNights = timeDifference / (1000 * 3600 * 24); // Convert ms to days
 
-        if (numNights > 0) {
-            const pricePerNight = <?= $hotel['price']; ?>;
-            const totalPrice = pricePerNight * numNights;
-            document.getElementById('total_price').value = `$${totalPrice.toFixed(2)}`;
-        } else {
-            document.getElementById('total_price').value = '$0.00';
-        }
-    }
-}
-</script>
+                    if (numNights > 0) {
+                        const pricePerNight = <?= $hotel['price']; ?>;
+                        const totalPrice = pricePerNight * numNights;
+                        document.getElementById('total_price').value = `$${totalPrice.toFixed(2)}`;
+                    } else {
+                        document.getElementById('total_price').value = '$0.00';
+                    }
+                }
+            }
+        </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-</body>
+    </body>
 </html>

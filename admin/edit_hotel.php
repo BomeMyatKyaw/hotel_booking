@@ -82,7 +82,8 @@
         </div>
 
         <div class="mb-3">
-            <label>Current Images</label><br>
+            <label>Current Images</label>
+            <br/>
             <?php while ($img = $images->fetch_assoc()): ?>
                 <div class="d-inline-block position-relative me-2">
                     <img src="../images/<?= htmlspecialchars($img['image']) ?>" width="100" class="img-thumbnail">

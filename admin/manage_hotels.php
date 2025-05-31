@@ -99,8 +99,10 @@
 
         .map-responsive iframe {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%;
             border: 0;
         }
 
@@ -131,7 +133,7 @@
                                     <input type="text" name="name" id="name" class="form-control" required>
                                 </div>
                                 <div>
-                                    <label for="price" class="form-label">Price</label>
+                                    <label for="price" class="form-label">Price (Ks)</label>
                                     <input type="number" name="price" id="price" class="form-control" required>
                                 </div>
                             </div>
@@ -176,7 +178,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Price</th>
+                        <th>Price (Ks)</th>
                         <th>Images</th>
                         <th>Location</th>
                         <th>Actions</th>
