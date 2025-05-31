@@ -74,7 +74,6 @@ $result = $conn->query($sql);
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title"><?= htmlspecialchars($hotel['name']) ?></h6>
                         <p class="card-text small"><?= htmlspecialchars(substr($hotel['description'], 0, 50)) ?>...</p>
-                        <p class="card-text"><strong><?= number_format($hotel['price'], 2) ?> Ks</strong></p>
 
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <a href="hotel_details.php?hotel_id=<?= $hotel['id'] ?>" class="btn btn-sm btn-primary mt-auto">View</a>

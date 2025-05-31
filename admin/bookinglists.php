@@ -38,9 +38,10 @@ if (!empty($where)) {
 }
 
 // Fetch bookings with filters
-$sql = "SELECT bookings.*, hotels.name AS hotel_name, users.username
+$sql = "SELECT bookings.*, hotels.name AS hotel_name, rooms.name AS room_name, users.username
         FROM bookings 
         JOIN hotels ON bookings.hotel_id = hotels.id 
+        JOIN rooms ON bookings.room_id = rooms.id 
         JOIN users ON bookings.user_id = users.id 
         $whereSql
         ORDER BY bookings.created ASC";
@@ -124,6 +125,7 @@ $result = $conn->query($sql);
                             <tr>
                                 <th>User</th>
                                 <th>Hotel</th>
+                                <th>Room</th>
                                 <th>Check-in</th>
                                 <th>Check-out</th>
                                 <th>Price</th>
@@ -136,6 +138,7 @@ $result = $conn->query($sql);
                             <tr>
                                 <td><?= htmlspecialchars($booking['username']); ?></td>
                                 <td><?= htmlspecialchars($booking['hotel_name']); ?></td>
+                                <td><?= htmlspecialchars($booking['room_name']); ?></td>
                                 <td><?= htmlspecialchars($booking['check_in']); ?></td>
                                 <td><?= htmlspecialchars($booking['check_out']); ?></td>
                                 <td><?= number_format($booking['total_price'], 2); ?>Ks</td>
@@ -167,6 +170,7 @@ $result = $conn->query($sql);
                                         <div class="modal-body">
                                             <p><strong>User:</strong> <?= htmlspecialchars($booking['username']); ?></p>
                                             <p><strong>Hotel:</strong> <?= htmlspecialchars($booking['hotel_name']); ?></p>
+                                            <p><strong>Room:</strong> <?= htmlspecialchars($booking['room_name']); ?></p>
                                             <p><strong>Check-in:</strong> <?= htmlspecialchars($booking['check_in']); ?></p>
                                             <p><strong>Check-out:</strong> <?= htmlspecialchars($booking['check_out']); ?></p>
                                             <p><strong>Total Price:</strong> <?= number_format($booking['total_price'], 2); ?> Ks</p>

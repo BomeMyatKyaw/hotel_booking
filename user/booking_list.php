@@ -27,9 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch bookings
-$sql = "SELECT bookings.*, hotels.name AS hotel_name 
+$sql = "SELECT bookings.*, hotels.name AS hotel_name, rooms.name AS room_name 
         FROM bookings 
         JOIN hotels ON bookings.hotel_id = hotels.id 
+        JOIN rooms ON bookings.room_id = rooms.id 
         WHERE bookings.user_id = $user_id 
         ORDER BY bookings.created DESC";
 $result = $conn->query($sql);
@@ -85,6 +86,7 @@ $result = $conn->query($sql);
                 <thead class="table-dark">
                     <tr>
                         <th>Hotel</th>
+                        <th>Room</th>
                         <th>Check-in</th>
                         <th>Check-out</th>
                         <th>Total Price</th>
@@ -96,6 +98,7 @@ $result = $conn->query($sql);
                 <?php while ($booking = $result->fetch_assoc()): ?>
                     <tr>
                         <td><?= htmlspecialchars($booking['hotel_name']); ?></td>
+                        <td><?= htmlspecialchars($booking['room_name']); ?></td>
                         <td><?= htmlspecialchars($booking['check_in']); ?></td>
                         <td><?= htmlspecialchars($booking['check_out']); ?></td>
                         <td>$<?= number_format($booking['total_price'], 2); ?></td>
@@ -145,6 +148,7 @@ $result = $conn->query($sql);
                                 </div>
                                 <div class="modal-body">
                                     <p><strong>Hotel Name:</strong> <?= htmlspecialchars($booking['hotel_name']); ?></p>
+                                    <p><strong>Room Name:</strong> <?= htmlspecialchars($booking['room_name']); ?></p>
                                     <p><strong>Check-in:</strong> <?= htmlspecialchars($booking['check_in']); ?></p>
                                     <p><strong>Check-out:</strong> <?= htmlspecialchars($booking['check_out']); ?></p>
                                     <p><strong>Total Price:</strong> $<?= number_format($booking['total_price'], 2); ?></p>
