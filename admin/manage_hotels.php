@@ -180,31 +180,31 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php while ($hotel = $hotels->fetch_assoc()): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($hotel['name']) ?></td>
-                            <td><?= htmlspecialchars($hotel['description']) ?></td>
-                            <td>
-                                <?php 
-                                    $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = {$hotel['id']}");
-                                    while ($img = $images->fetch_assoc()):
-                                ?>
-                                    <img src="../images/<?= htmlspecialchars($img['image']) ?>" width="50" class="m-1 rounded">
-                                <?php endwhile; ?>
-                            </td>
-                            <td>
-                                <?php if (!empty($hotel['location_embed'])): ?>
-                                    <div class="map-responsive"><?= $hotel['location_embed'] ?></div>
-                                <?php else: ?>
-                                    <span class="text-muted">No map</span>
-                                <?php endif; ?>
-                            </td>
-                            <td class="d-flex justify-content-center">
-                                <a href="edit_hotel.php?id=<?= $hotel['id'] ?>" class="btn btn-sm btn-warning mx-2">Edit</a>
-                                <a href="?delete=<?= $hotel['id'] ?>" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
+                        <?php while ($hotel = $hotels->fetch_assoc()): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($hotel['name']) ?></td>
+                                <td><?= htmlspecialchars($hotel['description']) ?></td>
+                                <td>
+                                    <?php 
+                                        $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = {$hotel['id']}");
+                                        while ($img = $images->fetch_assoc()):
+                                    ?>
+                                        <img src="../images/<?= htmlspecialchars($img['image']) ?>" width="50" class="m-1 rounded">
+                                    <?php endwhile; ?>
+                                </td>
+                                <td>
+                                    <?php if (!empty($hotel['location_embed'])): ?>
+                                        <div class="map-responsive"><?= $hotel['location_embed'] ?></div>
+                                    <?php else: ?>
+                                        <span class="text-muted">No map</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td class="d-flex justify-content-center">
+                                    <a href="edit_hotel.php?id=<?= $hotel['id'] ?>" class="btn btn-sm btn-warning mx-2">Edit</a>
+                                    <a href="?delete=<?= $hotel['id'] ?>" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
                     </tbody>
                 </table>
             </div>

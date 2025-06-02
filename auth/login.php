@@ -3,14 +3,14 @@ session_start();
 include('../includes/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
     // Sanitize input to prevent SQL injection
-    $username = $conn->real_escape_string($username);
+    $email = $conn->real_escape_string($email);
 
-    // Fetch user by username
-    $sql = "SELECT * FROM users WHERE username = '$username' AND status = 'active'";
+    // Fetch user by email
+    $sql = "SELECT * FROM users WHERE email = '$email' AND status = 'active'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $user['password'])) {
             // ✅ Set session variables
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email'];
             $_SESSION['role'] = $user['role']; // user or admin
 
             // ✅ Redirect based on role
@@ -82,8 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <form method="POST">
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" name="username" id="username" class="form-control" required>
+                <label for="email" class="form-label">Email</label>
+                <input type="text" name="email" id="email" class="form-control" required>
             </div>
 
             <div class="mb-3">

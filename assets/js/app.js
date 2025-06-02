@@ -42,27 +42,24 @@ $(document).ready(function(){
 
     // Start Property Section
 
-    $('.propertylists').click(function(){
+    $('.propertylists').click(function () {
 
-        // $(this).addClass('activeitems');
-        $(this).addClass('activeitems').siblings().removeClass('activeitems');
+		// Add 'activeitems' to clicked tab and remove from others
+		$(this).addClass('activeitems').siblings().removeClass('activeitems');
 
-        let filtervalue = $(this).attr('data-filter');
-            filtervalue = $(this).data('filter');
+		// Get filter value
+		let filtervalue = $(this).data('filter');
 
-        console.log(filtervalue);
+		console.log(filtervalue);
 
-        if(filtervalue === 'all'){
-            $('.filters').show('slide',500);
-        }else{
-            $('.filters').hide();
+		if (filtervalue === 'all') {
+			$('.filters').show('slide', 500);
+		} else {
+			$('.filters').hide(); // hide all first
+			$('.filters.' + filtervalue).show('slide', 500); // show matched
+		}
 
-            $('.filter').not('.'+filtervalue).hide('slide',500);
-            $('.filter').filter('.'+filtervalue).show('slide',500);
-
-        }
-        
-    });
+	});
 
     // End Property Section
 

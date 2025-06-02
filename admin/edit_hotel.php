@@ -31,9 +31,8 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = $_POST['name'];
         $description = $_POST['description'];
-        $price = $_POST['price'];
 
-        $conn->query("UPDATE hotels SET name='$name', description='$description', price='$price' WHERE id=$id");
+        $conn->query("UPDATE hotels SET name='$name', description='$description' WHERE id=$id");
 
         // Upload new images if any
         if (!empty($_FILES['images']['name'][0])) {
@@ -47,7 +46,7 @@
             }
         }
 
-        header("Location: manage_hotels.php");
+        header("Location: edit_hotel.php?id=$id");
         exit;
     }
 ?>
