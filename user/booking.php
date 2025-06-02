@@ -79,14 +79,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="mb-3">
             <label for="total_price" class="form-label">Total Price</label>
-            <input type="text" id="total_price" class="form-control" value="Ks 0.00" readonly>
+            <input type="text" id="total_price" class="form-control" value="0 Ks" readonly>
         </div>
         <button type="submit" class="btn btn-primary">Book Now</button>
     </form>
 </div>
 
 <script>
-    const pricePerNight = <?= (float)$room['price'] ?>;
+    const pricePerNight = <?= (int)$room['price'] ?>;
 
     function calculateTotalPrice() {
         const checkIn = new Date(document.getElementById('check_in').value);
@@ -96,9 +96,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (nights > 0) {
             const total = pricePerNight * nights;
-            document.getElementById('total_price').value = `Ks ${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('total_price').value = `${total.toLocaleString(undefined, {minimumFractionDigits: 0})} Ks`;
         } else {
-            document.getElementById('total_price').value = 'Ks 0.00';
+            document.getElementById('total_price').value = '0 Ks';
         }
     }
 

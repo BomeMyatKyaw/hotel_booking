@@ -141,7 +141,7 @@ $result = $conn->query($sql);
                                 <td><?= htmlspecialchars($booking['room_name']); ?></td>
                                 <td><?= htmlspecialchars($booking['check_in']); ?></td>
                                 <td><?= htmlspecialchars($booking['check_out']); ?></td>
-                                <td><?= number_format($booking['total_price'], 2); ?>Ks</td>
+                                <td><?= number_format($booking['total_price'], 0); ?>Ks</td>
                                 <td>
                                     <?php
                                     $status = $booking['status'];
@@ -173,7 +173,7 @@ $result = $conn->query($sql);
                                             <p><strong>Room:</strong> <?= htmlspecialchars($booking['room_name']); ?></p>
                                             <p><strong>Check-in:</strong> <?= htmlspecialchars($booking['check_in']); ?></p>
                                             <p><strong>Check-out:</strong> <?= htmlspecialchars($booking['check_out']); ?></p>
-                                            <p><strong>Total Price:</strong> <?= number_format($booking['total_price'], 2); ?> Ks</p>
+                                            <p><strong>Total Price:</strong> <?= number_format($booking['total_price'], 0); ?> Ks</p>
                                             <p><strong>Status:</strong>
                                                 <?php
                                                     if ($status === 'paid') {

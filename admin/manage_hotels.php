@@ -86,7 +86,7 @@
         }
 
         .main {
-            margin-left: 250px; /* Matches sidebar width */
+            margin-left: 250px;
         }
 
         .map-responsive {
@@ -99,9 +99,9 @@
 
         .map-responsive iframe {
             position: absolute;
-            top: 0; 
+            top: 0;
             left: 0;
-            width: 100%; 
+            width: 100%;
             height: 100%;
             border: 0;
         }
@@ -131,10 +131,6 @@
                                 <div>
                                     <label for="name" class="form-label">Hotel Name</label>
                                     <input type="text" name="name" id="name" class="form-control" required>
-                                </div>
-                                <div>
-                                    <label for="price" class="form-label">Price (Ks)</label>
-                                    <input type="number" name="price" id="price" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -178,7 +174,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Price (Ks)</th>
                         <th>Images</th>
                         <th>Location</th>
                         <th>Actions</th>
@@ -189,11 +184,10 @@
                         <tr>
                             <td><?= htmlspecialchars($hotel['name']) ?></td>
                             <td><?= htmlspecialchars($hotel['description']) ?></td>
-                            <td><?= number_format($hotel['price'], 2) ?>Ks</td>
                             <td>
                                 <?php 
-                                $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = {$hotel['id']}");
-                                while ($img = $images->fetch_assoc()):
+                                    $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = {$hotel['id']}");
+                                    while ($img = $images->fetch_assoc()):
                                 ?>
                                     <img src="../images/<?= htmlspecialchars($img['image']) ?>" width="50" class="m-1 rounded">
                                 <?php endwhile; ?>

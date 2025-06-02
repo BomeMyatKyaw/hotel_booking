@@ -101,17 +101,17 @@ $result = $conn->query($sql);
                         <td><?= htmlspecialchars($booking['room_name']); ?></td>
                         <td><?= htmlspecialchars($booking['check_in']); ?></td>
                         <td><?= htmlspecialchars($booking['check_out']); ?></td>
-                        <td>$<?= number_format($booking['total_price'], 2); ?></td>
+                        <td>$<?= number_format($booking['total_price'], 0); ?></td>
                         <td>
                             <?php
-                            $status = $booking['status'];
-                            if ($status === 'paid') {
-                                echo '<span class="badge bg-success">Paid</span>';
-                            } elseif ($status === 'cancelled') {
-                                echo '<span class="badge bg-danger">Cancelled</span>';
-                            } else {
-                                echo '<span class="badge bg-warning text-dark">Unpaid</span>';
-                            }
+                                $status = $booking['status'];
+                                if ($status === 'paid') {
+                                    echo '<span class="badge bg-success">Paid</span>';
+                                } elseif ($status === 'cancelled') {
+                                    echo '<span class="badge bg-danger">Cancelled</span>';
+                                } else {
+                                    echo '<span class="badge bg-warning text-dark">Unpaid</span>';
+                                }
                             ?>
                         </td>
                         <td>
@@ -151,7 +151,7 @@ $result = $conn->query($sql);
                                     <p><strong>Room Name:</strong> <?= htmlspecialchars($booking['room_name']); ?></p>
                                     <p><strong>Check-in:</strong> <?= htmlspecialchars($booking['check_in']); ?></p>
                                     <p><strong>Check-out:</strong> <?= htmlspecialchars($booking['check_out']); ?></p>
-                                    <p><strong>Total Price:</strong> $<?= number_format($booking['total_price'], 2); ?></p>
+                                    <p><strong>Total Price:</strong> $<?= number_format($booking['total_price'], 0); ?></p>
                                     <p><strong>Status:</strong>
                                         <?php
                                         if ($status === 'paid') {

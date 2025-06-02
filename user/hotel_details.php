@@ -116,9 +116,7 @@ $rooms = $conn->query("SELECT * FROM rooms WHERE hotel_id = $hotel_id");
 
             <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
-                    <a href="../admin/edit_hotel.php?id=<?= $hotel_id ?>" class="btn btn-warning">
-                        Edit Hotel
-                    </a>
+                    <a href="../admin/edit_hotel.php?id=<?= $hotel_id ?>" class="btn btn-warning">Edit Hotel</a>
                 <?php endif; ?>
             </div>
 
