@@ -14,21 +14,26 @@ $result = $conn->query($sql);
     <title>Hotel Booking</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
         body {
             background-color: #f8f9fa;
         }
+
         .hotel-card {
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
+
         .hotel-card:hover {
             transform: translateY(-5px);
         }
+
         .carousel-inner img {
             border-top-left-radius: 12px;
             border-top-right-radius: 12px;
         }
+
         footer {
             background-color: #343a40;
             color: #fff;
@@ -36,6 +41,7 @@ $result = $conn->query($sql);
             padding: 10px;
             margin-top: 40px;
         }
+        
     </style>
 </head>
 <body>

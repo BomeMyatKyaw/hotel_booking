@@ -61,23 +61,29 @@ $result = $conn->query($sql);
         body { 
             background-color: #f8f9fa; 
         }
+
         .main { 
             margin-left: 250px; 
         }
+
         .table th, .table td { 
             vertical-align: middle; 
         }
+        
         .btn-info, .btn-danger { 
             font-size: 0.9rem; 
             padding: 0.4rem 1rem; 
         }
+
         .modal-content { 
             border-radius: 10px; 
         }
+
         .modal-header { 
             background-color: #343a40; 
             color: #fff; 
         }
+        
         .modal-footer button, .back-btn { 
             border-radius: 50px; 
         }

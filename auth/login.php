@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         body {
             background-color: #f4f6f9;
         }
+
         .login-container {
             max-width: 400px;
             margin: 50px auto;
@@ -58,13 +59,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .login-container h2 {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .login-container .form-control {
             margin-bottom: 15px;
         }
+        
         .login-container button {
             width: 100%;
         }

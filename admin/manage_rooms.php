@@ -129,10 +129,23 @@ $rooms = $conn->query("
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/dashboardstyle.css" />
     <style>
-        body { font-family: Arial, sans-serif; }
-        .main { margin-left: 250px; }
-        .room-img { max-width: 100px; max-height: 80px; object-fit: cover; }
-        .table th, .table td { vertical-align: middle; }
+        body { 
+            font-family: Arial, sans-serif; 
+        }
+
+        .main { 
+            margin-left: 250px; 
+        }
+
+        .room-img { 
+            max-width: 100px; 
+            max-height: 80px; 
+            object-fit: cover; 
+        }
+
+        .table th, .table td { 
+            vertical-align: middle; 
+        }
     </style>
 </head>
 <body>
@@ -205,6 +218,7 @@ $rooms = $conn->query("
             <table class="table table-bordered table-striped">
                 <thead class="table-light">
                     <tr>
+                        <th>Room Name</th>
                         <th>Room Type</th>
                         <th>Hotel</th>
                         <th>Description</th>
@@ -217,6 +231,7 @@ $rooms = $conn->query("
                 <tbody>
                     <?php while ($room = $rooms->fetch_assoc()): ?>
                     <tr>
+                        <td><?= htmlspecialchars($room['name']) ?></td>
                         <td><?= htmlspecialchars($room['room_type']) ?></td>
                         <td><?= htmlspecialchars($room['hotel_name']) ?></td>
                         <td><?= htmlspecialchars($room['description']) ?></td>

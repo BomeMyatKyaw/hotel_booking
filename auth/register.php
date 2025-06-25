@@ -34,9 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        
         body {
             background-color: #f4f6f9;
         }
+
         .register-container {
             max-width: 400px;
             margin: 50px auto;
@@ -45,16 +47,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .register-container h2 {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .register-container .form-control {
             margin-bottom: 15px;
         }
+
         .register-container button {
             width: 100%;
         }
+
     </style>
 </head>
 <body>

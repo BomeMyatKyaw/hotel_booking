@@ -177,7 +177,7 @@
         <tbody>
             <?php while ($user = $users->fetch_assoc()): ?>
                 <tr>
-                    <td><?= $user['id'] ?></td>
+                    <td style="text-align:center;"><?= $user['id'] ?></td>
                     <td><?= htmlspecialchars($user['username']) ?></td>
                     <td><?= htmlspecialchars($user['email']) ?></td>
 
@@ -194,7 +194,7 @@
                     </td>
 
                     <!-- Toggle Switch for Status -->
-                    <td>
+                    <td style="text-align:center;">
                         <form method="post">
                             <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
                             <input type="hidden" name="update_status" value="1">

@@ -25,9 +25,11 @@ $rooms = $conn->query("SELECT * FROM rooms WHERE hotel_id = $hotel_id");
     <title>Hotel Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
         body {
             background-color: #f1f3f5;
         }
+
         .hotel-card {
             background: #fff;
             border-radius: 16px;
@@ -35,16 +37,19 @@ $rooms = $conn->query("SELECT * FROM rooms WHERE hotel_id = $hotel_id");
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
             margin-bottom: 40px;
         }
+        
         .carousel img {
             height: 330px;
             object-fit: cover;
         }
+
         .map-responsive {
             overflow: hidden;
             padding-bottom: 56.25%;
             position: relative;
             height: 0;
         }
+
         .map-responsive iframe {
             position: absolute;
             top: 0; left: 0;
@@ -52,6 +57,7 @@ $rooms = $conn->query("SELECT * FROM rooms WHERE hotel_id = $hotel_id");
             height: 100%;
             border: 0;
         }
+
         .room-card {
             border: 1px solid #dee2e6;
             border-radius: 12px;
@@ -60,9 +66,11 @@ $rooms = $conn->query("SELECT * FROM rooms WHERE hotel_id = $hotel_id");
             box-shadow: 0 2px 6px rgba(0,0,0,0.05);
             transition: 0.2s;
         }
+
         .room-card:hover {
             box-shadow: 0 6px 20px rgba(0,0,0,0.1);
         }
+        
     </style>
 </head>
 <body class="py-4">

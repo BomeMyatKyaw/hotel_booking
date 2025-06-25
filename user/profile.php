@@ -48,19 +48,24 @@ if (isset($_POST['delete'])) {
     <title>Edit Account</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
         body {
             background-color: #f8f9fa;
         }
+        
         .card {
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+
         .form-label {
             font-weight: 500;
         }
+
         .btn {
             border-radius: 30px;
         }
+
     </style>
 </head>
 <body class="p-4">
