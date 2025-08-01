@@ -654,7 +654,7 @@ session_start();
 						<div class="filters chaungthar"><a href="./assets/img/gallery/image6.jpg" data-title="image6" data-lightbox="roadtrip"><img src="./assets/img/gallery/image6.jpg" width="200px" alt="image6" /></a></div>
 						<div class="filters chaungthar"><a href="./assets/img/gallery/image7.jpg" data-title="image7" data-lightbox="roadtrip"><img src="./assets/img/gallery/image7.jpg" width="200px" alt="image7" /></a></div>
 						<div class="filters chaungthar"><a href="./assets/img/gallery/image8.jpg" data-title="image8" data-lightbox="roadtrip"><img src="./assets/img/gallery/image8.jpg" width="200px" alt="image8" /></a></div>
-						<div class="filters funiture"><a href="./assets/img/gallery/image9.jpg" data-title="image9" data-lightbox="roadtrip"><img src="./assets/img/gallery/image9.jpg" width="200px" alt="image9" /></a></div>
+						<div class="filters ngapali"><a href="./assets/img/gallery/image9.jpg" data-title="image9" data-lightbox="roadtrip"><img src="./assets/img/gallery/image9.jpg" width="200px" alt="image9" /></a></div>
 						<div class="filters ngapali"><a href="./assets/img/gallery/image1.jpg" data-title="image1" data-lightbox="roadtrip"><img src="./assets/img/gallery/image1.jpg" width="200px" alt="image1" /></a></div>
 						<div class="filters chaungthar"><a href="./assets/img/gallery/image2.jpg" data-title="image2" data-lightbox="roadtrip"><img src="./assets/img/gallery/image2.jpg" width="200px" alt="image2" /></a></div>
 						<div class="filters chaungthar"><a href="./assets/img/gallery/image3.jpg" data-title="image3" data-lightbox="roadtrip"><img src="./assets/img/gallery/image3.jpg" width="200px" alt="image3" /></a></div>
@@ -1001,7 +1001,7 @@ session_start();
 						<h5 class="mb-3">Contact Us</h5>
 						<ul class="list-unstyled">
 							<li>Email: <a href="javascript:void(0);" class="footerlinks">goldensands@gmail.com</a></li>
-							<li>Phone: <a href="javascript:void(0);" class="footerlinks">+95 9 123456789 / +95 9 987654321</a></li>
+							<li>Phone: <a href="javascript:void(0);" class="footerlinks">+95 9 123456789</a> / <a href="javascript:void(0);" class="footerlinks">+95 9 987654321</a></li>
 						</ul>
 					</div>
 				</div>

@@ -28,13 +28,15 @@ if (isset($_GET['edit'])) {
 // Add new room
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     $hotel_id = $_POST['hotel_id'];
+    $name = $_POST['name'];
     $room_type = $_POST['room_type'];
     $description = $_POST['description'];
     $price = $_POST['price'];
     $max_guests = $_POST['max_guests'];
+    $total_rooms = $_POST['total_rooms'];
 
-    $stmt = $conn->prepare("INSERT INTO rooms (hotel_id, room_type, description, price, max_guests) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("issdi", $hotel_id, $room_type, $description, $price, $max_guests);
+    $stmt = $conn->prepare("INSERT INTO rooms (hotel_id, name, room_type, description, price, max_guests, total_rooms) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isssdii", $hotel_id, $name, $room_type, $description, $price, $max_guests, $total_rooms);
     $stmt->execute();
     $room_id = $stmt->insert_id;
     $stmt->close();
@@ -57,14 +59,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
 // Update room
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     $room_id = $_POST['room_id'];
+    $name = $_POST['name'];
     $hotel_id = $_POST['hotel_id'];
     $room_type = $_POST['room_type'];
     $description = $_POST['description'];
     $price = $_POST['price'];
     $max_guests = $_POST['max_guests'];
+    $total_rooms = $_POST['total_rooms'];
 
-    $stmt = $conn->prepare("UPDATE rooms SET hotel_id = ?, room_type = ?, description = ?, price = ?, max_guests = ? WHERE id = ?");
-    $stmt->bind_param("issdii", $hotel_id, $room_type, $description, $price, $max_guests, $room_id);
+    $stmt = $conn->prepare("UPDATE rooms SET hotel_id = ?, name = ?, room_type = ?, description = ?, price = ?, max_guests = ?, total_rooms = ? WHERE id = ?");
+    $stmt->bind_param("isssdiii", $hotel_id, $name, $room_type, $description, $price, $max_guests, $total_rooms, $room_id);
     $stmt->execute();
     $stmt->close();
 
@@ -119,6 +123,15 @@ $rooms = $conn->query("
     $searchQuery
     ORDER BY r.id DESC
 ");
+
+$today = date('Y-m-d');
+$bookingStmt = $conn->prepare("
+    SELECT SUM(num_rooms) AS booked
+    FROM bookings 
+    WHERE room_id = ? 
+    AND check_in <= ? AND check_out > ?
+");
+
 ?>
 
 <!DOCTYPE html>
@@ -174,6 +187,10 @@ $rooms = $conn->query("
                                 </select>
                             </div>
                             <div class="mb-3">
+                                <label for="name" class="form-label">Room Name</label>
+                                <input type="text" name="name" id="name" class="form-control" value="<?= $editMode ? htmlspecialchars($editRoom['name']) : '' ?>" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="room_type" class="form-label">Room Type</label>
                                 <input type="text" name="room_type" id="room_type" class="form-control" value="<?= $editMode ? htmlspecialchars($editRoom['room_type']) : '' ?>" required>
                             </div>
@@ -190,6 +207,10 @@ $rooms = $conn->query("
                             <div class="mb-3">
                                 <label for="max_guests" class="form-label">Max Guests</label>
                                 <input type="number" name="max_guests" id="max_guests" class="form-control" value="<?= $editMode ? $editRoom['max_guests'] : '2' ?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="total_rooms" class="form-label">Total Rooms</label>
+                                <input type="number" name="total_rooms" id="total_rooms" class="form-control" value="<?= $editMode ? $editRoom['total_rooms'] : '1' ?>" required>
                             </div>
                             <div class="mb-3">
                                 <label for="image" class="form-label">Room Image</label>
@@ -225,6 +246,7 @@ $rooms = $conn->query("
                         <th>Price (Ks)</th>
                         <th>Image</th>
                         <th>Guests</th>
+                        <th>Max Rooms</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -244,6 +266,7 @@ $rooms = $conn->query("
                             <?php endif; ?>
                         </td>
                         <td><?= (int)$room['max_guests'] ?></td>
+                        <td><?= htmlspecialchars($room['total_rooms']) ?></td>
                         <td class="d-flex justify-content-center">
                             <a href="manage_rooms.php?edit=<?= $room['id'] ?>" class="btn btn-sm btn-warning mx-2">Edit</a>
                             <a href="?delete=<?= $room['id'] ?>" onclick="return confirm('Delete this room?')" class="btn btn-sm btn-danger">Delete</a>
