@@ -733,39 +733,6 @@ session_start();
 		</section>
 		<!-- End Beach Section -->
 
-		<!-- Start Client Section -->
-		<section class="p-3">
-
-			<div class="container-fluid">
-
-				<!-- Start title -->
-
-				<div class="text-center">
-					<div class="col">
-						<h3 class="titles">Satisfied Clients</h3>
-					</div>
-				</div>
-
-				<!-- End title -->
-
-				<div class="row">
-					<div class="col-12">
-						<ul class="clientlists">
-							<li><img src="./assets/img/clients/client1.png" alt="client1" /></li>
-							<li><img src="./assets/img/clients/client2.png" alt="client2" /></li>
-							<li><img src="./assets/img/clients/client3.png" alt="client3" /></li>
-							<li><img src="./assets/img/clients/client4.png" alt="client4" /></li>
-							<li><img src="./assets/img/clients/client5.png" alt="client5" /></li>
-						</ul>
-					</div>
-				</div>
-
-			</div>
-			
-		</section>
-		<!-- End Client Section -->
-
-
 		<!-- Start Customers Section -->
 		<section class="py-3 customers">
 			<div class="container-fluid">
@@ -1000,8 +967,8 @@ session_start();
 					<div class="col-md-3 col-sm-6">
 						<h5 class="mb-3">Contact Us</h5>
 						<ul class="list-unstyled">
-							<li>Email: <a href="javascript:void(0);" class="footerlinks">goldensands@gmail.com</a></li>
-							<li>Phone: <a href="javascript:void(0);" class="footerlinks">+95 9 123456789</a> / <a href="javascript:void(0);" class="footerlinks">+95 9 987654321</a></li>
+							<li>Email: <a href="mailto:goldensands@gmail.com" class="footerlinks">goldensands@gmail.com</a></li>
+							<li>Phone: <a href="tel:+959123456789" class="footerlinks">+95 9 123456789</a> / <a href="tel:+959987654321" class="footerlinks">+95 9 987654321</a></li>
 						</ul>
 					</div>
 				</div>

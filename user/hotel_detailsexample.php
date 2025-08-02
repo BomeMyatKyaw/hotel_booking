@@ -6,13 +6,14 @@ $hotel_id = (int)$_GET['hotel_id'];
 $hotel = $conn->query("SELECT * FROM hotels WHERE id = $hotel_id")->fetch_assoc();
 $images = $conn->query("SELECT image FROM hotel_images WHERE hotel_id = $hotel_id");
 
-$rooms = $conn->query("SELECT r.*, (
+$rooms = $conn->query("SELECT r.*, r.total_rooms, (
     SELECT IFNULL(SUM(b.num_rooms), 0)
     FROM bookings b
     WHERE b.room_id = r.id
       AND b.check_in <= CURDATE()
       AND b.check_out > CURDATE()
 ) AS booked_rooms FROM rooms r WHERE r.hotel_id = $hotel_id");
+
 ?>
 
 <!DOCTYPE html>

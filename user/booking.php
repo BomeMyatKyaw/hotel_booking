@@ -4,7 +4,7 @@ include('../includes/db.php');
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: auth/login.php");
+    header("Location: ../auth/login.php");
     exit();
 }
 
@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $check_in = $_POST['check_in'];
     $check_out = $_POST['check_out'];
 
-    // Validate date range
     if (strtotime($check_out) <= strtotime($check_in)) {
         echo "<script>alert('Check-out date must be after check-in date!');</script>";
     } else {
@@ -43,14 +42,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $price_per_night = $room['price'];
         $total_price = $price_per_night * $num_nights;
 
-        // Insert booking
-        $stmt = $conn->prepare("INSERT INTO bookings (user_id, hotel_id, room_id, check_in, check_out, total_price, created) VALUES (?, ?, ?, ?, ?, ?, NOW())");
-        $stmt->bind_param("iiissd", $user_id, $hotel_id, $room_id, $check_in, $check_out, $total_price);
+        // Step 1: Get total_rooms for the selected room
+        $stmt = $conn->prepare("SELECT total_rooms FROM rooms WHERE id = ?");
+        $stmt->bind_param("i", $room_id);
+        $stmt->execute();
+        $stmt->bind_result($total_rooms);
+        $stmt->fetch();
+        $stmt->close();
 
-        if ($stmt->execute()) {
-            echo "<script>alert('Booking Successful!'); window.location.href='./booking_list.php';</script>";
+        // Step 2: Count how many times this room is booked (each booking = 1 room)
+        $stmt = $conn->prepare("
+            SELECT COUNT(*)
+            FROM bookings
+            WHERE room_id = ?
+            AND status != 'cancelled'
+            AND check_in < ?
+            AND check_out > ?
+        ");
+        $stmt->bind_param("iss", $room_id, $check_out, $check_in);
+        $stmt->execute();
+        $stmt->bind_result($booked_rooms);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Step 3: Check if available rooms
+        $available = $total_rooms - $booked_rooms;
+
+        if ($available > 0) {
+            // Proceed with booking
+            $stmt = $conn->prepare("INSERT INTO bookings (user_id, hotel_id, room_id, check_in, check_out, total_price, created) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+            $stmt->bind_param("iiissd", $user_id, $hotel_id, $room_id, $check_in, $check_out, $total_price);
+
+            if ($stmt->execute()) {
+                echo "<script>alert('Booking Successful!'); window.location.href='./booking_list.php';</script>";
+            } else {
+                echo "<script>alert('Booking Failed!');</script>";
+            }
         } else {
-            echo "<script>alert('Booking Failed!');</script>";
+            echo "<script>alert('No available rooms for the selected dates!');</script>";
         }
     }
 }

@@ -102,12 +102,16 @@ $result = $conn->query($sql);
                             <a href="../auth/login.php" class="btn btn-sm btn-outline-secondary mt-auto">Login</a>
                         <?php endif; ?> -->
 
-                        <?php $isFull = $hotel['booked_rooms'] >= $hotel['total_rooms']; ?>
-                            <?php if (isset($_SESSION['user_id'])): ?>
-                                <a href="hotel_detail.php?hotel_id=<?= $hotel['id'] ?>" class="btn btn-sm btn-primary mt-auto">View</a>
-                            <?php else: ?>
-                                <a href="../auth/login.php" class="btn btn-sm btn-outline-secondary mt-auto">Login</a>
-                        <?php endif; ?>
+                        <?php if (!isset($_SESSION['user_id'])): ?>
+                    <a href="../auth/login.php" class="btn btn-sm btn-outline-secondary mt-auto">Login</a>
+                <?php else: ?>
+                    <?php $isFull = $hotel['booked_rooms'] >= $hotel['total_rooms']; ?>
+                    <?php if ($isFull): ?>
+                        <button class="btn btn-sm btn-secondary mt-auto" disabled>Full</button>
+                    <?php else: ?>
+                        <a href="hotel_details.php?hotel_id=<?= $hotel['id'] ?>" class="btn btn-sm btn-primary mt-auto">View</a>
+                    <?php endif; ?>
+                <?php endif; ?>
 
                     </div>
                 </div>

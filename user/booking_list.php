@@ -12,11 +12,28 @@ $user_id = $_SESSION['user_id'];
 // Handle POST actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['cancel_booking_id'])) {
-        $cancel_id = intval($_POST['cancel_booking_id']);
+    $cancel_id = intval($_POST['cancel_booking_id']);
+
+    // Fetch room_id and num_rooms from the booking being cancelled
+    $booking_sql = "SELECT room_id, num_rooms FROM bookings WHERE id = $cancel_id AND user_id = $user_id AND status != 'cancelled'";
+    $booking_result = $conn->query($booking_sql);
+
+    if ($booking_result && $booking_result->num_rows > 0) {
+        $booking = $booking_result->fetch_assoc();
+        $room_id = $booking['room_id'];
+        $num_rooms = $booking['num_rooms'];
+
+        // Update the booking status
         $conn->query("UPDATE bookings SET status = 'cancelled' WHERE id = $cancel_id AND user_id = $user_id");
-        header("Location: booking_list.php");
-        exit();
+
+        // Restore room availability
+        $conn->query("UPDATE rooms SET available_rooms = available_rooms + $num_rooms WHERE id = $room_id");
     }
+
+    header("Location: booking_list.php");
+    exit();
+}
+
 
     if (isset($_POST['pay_booking_id'])) {
         $pay_id = intval($_POST['pay_booking_id']);
