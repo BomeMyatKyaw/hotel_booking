@@ -122,52 +122,95 @@
 
     @media (max-width: 768px) {
         .contact-wrapper {
-          grid-template-columns: 1fr;
+            grid-template-columns: 1fr;
+        }
+
+        .contact-form {
+            padding-right: 0;
         }
     }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Contact Golden Sands</h1>
-        <p>We'd love to hear from you</p>
-    </header>
+<header>
+    <h1>Contact Golden Sands</h1>
+    <p>We'd love to hear from you</p>
+</header>
 
-    <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-wrapper">
-            <!-- Contact Info -->
-            <div class="contact-info">
-
-                <h2>Contact Details</h2>
-
-                <p><strong>Address:</strong>Golden Sands HQ, Seaside Road, Beach City, CA 90210</p>
-
-                <p><strong>Phone:</strong>+1 (800) 123-4567</p>
-
-                <p><strong>Email:</strong>support@goldensandshotels.com</p>
-
-                <p><strong>Working Hours:</strong>Mon – Fri: 9am – 6pm</p>
-
-            </div>
-
-            <!-- Contact Form -->
-            <form class="contact-form">
-                <input type="text"placeholder="Your Name" required />
-                <input type="email" placeholder="Your Email" required />
-                <input type="text" placeholder="Subject" />
-                <textarea rows="6" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
+<div class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact-wrapper">
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <h2>Contact Details</h2>
+            <p><strong>Address:</strong> Golden Sands HQ, Seaside Road, Beach City, CA 90210</p>
+            <p><strong>Phone:</strong> +1 (800) 123-4567</p>
+            <p><strong>Email:</strong> support@goldensandshotels.com</p>
+            <p><strong>Working Hours:</strong> Mon – Fri: 9am – 6pm</p>
         </div>
-    </div>
 
-      
-    <footer>
-        <p>© 2025 Golden Sands Hotel Booking Services. All rights reserved.</p>
-        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-    </footer>
+        <!-- Contact Form -->
+        <form class="contact-form" method="POST" action="">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <input type="text" name="subject" placeholder="Subject" />
+            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+            <button type="submit" name="send">Send Message</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Golden Sands Hotel Booking Services. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+</footer>
 
 </body>
+
+<?php
+// Include PHPMailer classes
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Include manually (no Composer)
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+require 'PHPMailer/Exception.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
+    $mail = new PHPMailer(true);
+
+    try {
+        // Form values
+        $name = htmlspecialchars(trim($_POST['name']));
+        $email = htmlspecialchars(trim($_POST['email']));
+        $subject = htmlspecialchars(trim($_POST['subject']));
+        $message = htmlspecialchars(trim($_POST['message']));
+
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; 
+        $mail->SMTPAuth = true;
+        $mail->Username = 'bomekyaw13@gmail.com';  // ✅ CHANGE HERE
+        $mail->Password = 'jcye mxfk beco kdko';    // ✅ CHANGE HERE
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        // Sender and recipient
+        $mail->setFrom($email, $name);
+        $mail->addAddress('bomekyaw13@gmail.com'); // ✅ Your receiving email
+
+        // Email content
+        $mail->Subject = "New Contact: $subject";
+        $mail->Body = "From: $name <$email>\n\n$message";
+
+        $mail->send();
+        echo "<script>alert('Your message was sent successfully!');</script>";
+    } catch (Exception $e) {
+        echo "<script>alert('Message failed to send. Mailer Error: {$mail->ErrorInfo}');</script>";
+    }
+}
+?>
+
 </html>
