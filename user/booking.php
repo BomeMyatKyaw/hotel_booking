@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Disable today and past dates
     window.onload = function () {
         const today = new Date();
-        today.setDate(today.getDate() + 1); // disable today by allowing only from tomorrow
+        today.setDate(today.getDate()); // if add +1 happen tomorrow
         const minDate = today.toISOString().split('T')[0];
 
         document.getElementById('check_in').min = minDate;

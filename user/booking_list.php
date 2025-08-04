@@ -51,6 +51,17 @@ $sql = "SELECT bookings.*, hotels.name AS hotel_name, rooms.name AS room_name
         WHERE bookings.user_id = $user_id 
         ORDER BY bookings.created DESC";
 $result = $conn->query($sql);
+
+
+// Auto-cancel expired unpaid bookings
+$today = date('Y-m-d');
+$conn->query("
+    UPDATE bookings 
+    SET status = 'cancelled' 
+    WHERE user_id = $user_id 
+      AND status = 'unpaid' 
+      AND check_out < '$today'
+");
 ?>
 
 <!DOCTYPE html>
