@@ -159,9 +159,9 @@
 
             <!-- Search -->
             <div class="mb-3">
-                <form method="GET">
+                <form method="GET" class="col-md-3">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Search hotel..." value="<?= htmlspecialchars($search) ?>">
+                        <input type="text" name="search" class="form-control me-2" placeholder="Search hotel..." value="<?= htmlspecialchars($search) ?>">
                         <button class="btn btn-primary">Search</button>
                     </div>
                 </form>

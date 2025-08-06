@@ -229,7 +229,7 @@ $bookingStmt = $conn->prepare("
         </div>
 
         <div class="mb-3">
-            <form method="GET" class="d-flex">
+            <form method="GET" class="d-flex col-md-3">
                 <input type="text" name="search" class="form-control me-2" placeholder="Search room or hotel..." value="<?= htmlspecialchars($search) ?>">
                 <button class="btn btn-primary">Search</button>
             </form>
