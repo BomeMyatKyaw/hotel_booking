@@ -138,7 +138,7 @@ $conn->query("
                         <td><?= htmlspecialchars($booking['room_name']); ?></td>
                         <td><?= htmlspecialchars($booking['check_in']); ?></td>
                         <td><?= htmlspecialchars($booking['check_out']); ?></td>
-                        <td>$<?= number_format($booking['total_price'], 0); ?></td>
+                        <td><?= number_format($booking['total_price'], 0); ?>Ks</td>
                         <td>
                             <?php
                                 $status = $booking['status'];
