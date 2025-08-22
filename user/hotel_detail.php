@@ -3,7 +3,7 @@ session_start();
 include('../includes/db.php');
 
 // Check for hotel_id
-if (!isset($_GET['hotel_id'])) {
+if (!isset($_GET['hotel_id'])){
     header("Location: hotels.php");
     exit();
 }
@@ -12,7 +12,7 @@ $hotel_id = (int)$_GET['hotel_id'];
 
 // Fetch hotel
 $hotel = $conn->query("SELECT * FROM hotels WHERE id = $hotel_id")->fetch_assoc();
-if (!$hotel) {
+if (!$hotel){
     echo "Hotel not found.";
     exit();
 }
@@ -186,10 +186,14 @@ $rooms = $stmt->get_result();
             <div class="col-md-4 mb-3 d-flex">
                 <div class="room-card w-100 d-flex flex-column">
                     <div class="flex-grow-1">
-                        <h5><?= htmlspecialchars($room['name']) ?></h5>
+                        <h5><strong><?= htmlspecialchars($room['name']) ?></strong></h5>
                         <p><?= htmlspecialchars($room['description']) ?></p>
-                        <p><strong>Price:</strong> <?= number_format($room['price']) ?> Ks</p>
-                        <p><strong>Available:</strong> <?= max(0, $room['available_rooms']) ?> / <?= $room['total_rooms'] ?></p>
+                        <div class="d-flex justify-content-between">
+                            <span><strong>Price : </strong> <?= number_format($room['price']) ?> Ks</span>
+
+                            <p class="me-3"><strong>Max Guest : </strong> <?= number_format($room['max_guests'])?></p>
+                        </div>
+                        <p><strong>Available : </strong> <?= max(0, $room['available_rooms']) ?> / <?= $room['total_rooms'] ?></p>
                     </div>
                     <div>
                         <?php if ($isFull): ?>

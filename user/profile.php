@@ -2,7 +2,7 @@
 session_start();
 include('../includes/db.php');
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])){
     header("Location: ../auth/login.php");
     exit;
 }
@@ -17,7 +17,7 @@ if (!$user) {
 }
 
 // Update account
-if (isset($_POST['update'])) {
+if (isset($_POST['update'])){
     $username = $conn->real_escape_string($_POST['username']);
     $email = $conn->real_escape_string($_POST['email']);
 
@@ -26,7 +26,7 @@ if (isset($_POST['update'])) {
 }
 
 // Disable account (soft deactivate)
-if (isset($_POST['disable'])) {
+if (isset($_POST['disable'])){
     $conn->query("UPDATE users SET status = 'disabled' WHERE id = $user_id");
     session_destroy();
     header("Location: ../auth/login.php");
@@ -34,7 +34,7 @@ if (isset($_POST['disable'])) {
 }
 
 // Delete account (permanent)
-if (isset($_POST['delete'])) {
+if (isset($_POST['delete'])){
     $conn->query("DELETE FROM users WHERE id = $user_id");
     session_destroy();
     header("Location: ../auth/register.php");

@@ -7,8 +7,8 @@ include('../includes/db.php');
 
 $sql = "
     SELECT h.id, h.name, h.description,
-           IFNULL(SUM(r.total_rooms), 0) AS total_rooms,
-           IFNULL(SUM(b.num_rooms), 0) AS booked_rooms
+        IFNULL(SUM(r.total_rooms), 0) AS total_rooms,
+        IFNULL(SUM(b.num_rooms), 0) AS booked_rooms
     FROM hotels h
     LEFT JOIN rooms r ON r.hotel_id = h.id
     LEFT JOIN bookings b ON b.room_id = r.id
@@ -95,12 +95,6 @@ $result = $conn->query($sql);
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title"><?= htmlspecialchars($hotel['name']) ?></h6>
                         <p class="card-text small"><?= htmlspecialchars(substr($hotel['description'], 0, 50)) ?>...</p>
-
-                        <!-- <?php if (isset($_SESSION['user_id'])): ?>
-                            <a href="hotel_details.php?hotel_id=<?= $hotel['id'] ?>" class="btn btn-sm btn-primary mt-auto">View</a>
-                        <?php else: ?>
-                            <a href="../auth/login.php" class="btn btn-sm btn-outline-secondary mt-auto">Login</a>
-                        <?php endif; ?> -->
 
                         <?php $isFull = $hotel['booked_rooms'] >= $hotel['total_rooms']; ?>
                             <?php if (isset($_SESSION['user_id'])): ?>

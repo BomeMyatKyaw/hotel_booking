@@ -3,13 +3,13 @@ session_start();
 include('../includes/db.php');
 
 // Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])){
     header("Location: ../auth/login.php");
     exit();
 }
 
 // Check for hotel_id and room_id
-if (!isset($_GET['hotel_id']) || !isset($_GET['room_id'])) {
+if (!isset($_GET['hotel_id']) || !isset($_GET['room_id'])){
     header("Location: ./hotels.php");
     exit();
 }
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("INSERT INTO bookings (user_id, hotel_id, room_id, check_in, check_out, total_price, created) VALUES (?, ?, ?, ?, ?, ?, NOW())");
             $stmt->bind_param("iiissd", $user_id, $hotel_id, $room_id, $check_in, $check_out, $total_price);
 
-            if ($stmt->execute()) {
+            if ($stmt->execute()){
                 echo "<script>alert('Booking Successful!'); window.location.href='./booking_list.php';</script>";
             } else {
                 echo "<script>alert('Booking Failed!');</script>";
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script>
     const pricePerNight = <?= (int)$room['price'] ?>;
 
-    function calculateTotalPrice() {
+    function calculateTotalPrice(){
         const checkIn = new Date(document.getElementById('check_in').value);
         const checkOut = new Date(document.getElementById('check_out').value);
         const timeDiff = checkOut - checkIn;
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     document.getElementById('check_out').addEventListener('change', calculateTotalPrice);
 
     // Disable today and past dates
-    window.onload = function () {
+    window.onload = function(){
         const today = new Date();
         today.setDate(today.getDate()); // if add +1 happen tomorrow
         const minDate = today.toISOString().split('T')[0];
