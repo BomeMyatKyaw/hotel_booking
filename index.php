@@ -568,7 +568,7 @@ session_start();
 							<?php if ($_SESSION['role'] === 'admin'): ?>
 								<li class="nav-item"><a href="admin/dashboard.php" class="nav-link mx-2 menuitems">Dashboard</a></li>
 							<?php elseif ($_SESSION['role'] === 'user'): ?>
-								<li class="nav-item"><a href="user/booking_list.php" class="nav-link mx-2 menuitems">My Bookings</a></li>
+								<li class="nav-item"><a href="user/booking_list_fix.php" class="nav-link mx-2 menuitems">My Bookings</a></li>
 							<?php endif; ?>
 							<li class="nav-item"><a href="auth/logout.php" class="nav-link mx-2 menuitems">Logout</a></li>
 						<?php else: ?>
